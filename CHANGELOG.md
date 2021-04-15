@@ -12,3 +12,5 @@ All notable changes to this project are documented here.
 ## 0.5.0 - 2025-06-18
 
 - `seal` / `verify` hash chain is now stable across Python 3.11 and 3.12:
+  canonical encoding uses `sort_keys` and separators explicitly.
+- `verify` prints the expected and found digest of the first broken link.
