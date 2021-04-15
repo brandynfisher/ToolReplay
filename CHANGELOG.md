@@ -14,3 +14,6 @@ All notable changes to this project are documented here.
 - `seal` / `verify` hash chain is now stable across Python 3.11 and 3.12:
   canonical encoding uses `sort_keys` and separators explicitly.
 - `verify` prints the expected and found digest of the first broken link.
+- CLI: uniform exit codes (0 clean, 1 findings, 2 usage/parse error).
+
+## 0.4.0 - 2024-07-03
