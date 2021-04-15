@@ -17,3 +17,5 @@ All notable changes to this project are documented here.
 - CLI: uniform exit codes (0 clean, 1 findings, 2 usage/parse error).
 
 ## 0.4.0 - 2024-07-03
+
+- `replay` detects non-determinism between identical calls with different
