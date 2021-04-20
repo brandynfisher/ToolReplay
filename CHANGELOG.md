@@ -24,3 +24,6 @@ All notable changes to this project are documented here.
   `create_file`, `move_file`, `run_command`).
 - `scope` command added for declared-tools overreach checks.
 
+## 0.3.0 - 2023-08-11
+
+- SHA-256 hash chaining with genesis link and tamper verification in `chain.py`.
