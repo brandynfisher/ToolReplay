@@ -19,3 +19,6 @@ All notable changes to this project are documented here.
 ## 0.4.0 - 2024-07-03
 
 - `replay` detects non-determinism between identical calls with different
+  recorded responses; the first such index is the divergence point.
+- Redundancy detection respects mutator tools (`write_file`, `delete_file`,
+  `create_file`, `move_file`, `run_command`).
