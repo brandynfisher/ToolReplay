@@ -27,3 +27,6 @@ All notable changes to this project are documented here.
 ## 0.3.0 - 2023-08-11
 
 - SHA-256 hash chaining with genesis link and tamper verification in `chain.py`.
+- `seal` and `verify` subcommands; sealed transcripts are JSON Lines.
+- `findings.py` with fixed ordering: index, then kind.
+
