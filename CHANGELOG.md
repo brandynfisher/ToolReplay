@@ -30,3 +30,5 @@ All notable changes to this project are documented here.
 - `seal` and `verify` subcommands; sealed transcripts are JSON Lines.
 - `findings.py` with fixed ordering: index, then kind.
 
+## 0.2.0 - 2022-05-20
+
