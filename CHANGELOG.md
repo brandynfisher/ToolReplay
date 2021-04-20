@@ -22,3 +22,5 @@ All notable changes to this project are documented here.
   recorded responses; the first such index is the divergence point.
 - Redundancy detection respects mutator tools (`write_file`, `delete_file`,
   `create_file`, `move_file`, `run_command`).
+- `scope` command added for declared-tools overreach checks.
+
