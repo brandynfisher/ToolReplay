@@ -32,3 +32,6 @@ All notable changes to this project are documented here.
 
 ## 0.2.0 - 2022-05-20
 
+- Strict JSONL transcript parsing in `transcript.py`: unknown fields, bad
+  indices, and non-object args/responses are hard errors.
+- Canonical call encoding (`{"tool", "args"}` with sorted keys) used for
