@@ -89,3 +89,14 @@ toolreplay 0.6.0
 `replay` and `scope` are deliberately separate. Replay judges a session against itself and
 needs no external input. Scope judges a session against a permission declaration you supply,
 so it takes a second file. Keeping them apart means you can replay a session you have no
+scope file for, and you can check scope without caring whether the session replayed cleanly.
+
+## The three findings it detects
+
+Each finding type has a rule, a real example from `samples/session-dirty.jsonl`, and a
+reason it matters when the transcript came from an agent rather than a person.
+
+### Non-determinism
+
+Rule: the first time a call appears, its recorded response is remembered. If the same call
+(same tool name, same arguments after canonical JSON encoding) appears again with a
