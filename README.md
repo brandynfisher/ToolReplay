@@ -54,3 +54,15 @@ Between replay and scope, all three finding types this tool detects are present 
 six-line sample.
 
 ## Install
+
+toolreplay needs Python 3.11 or newer and has no third-party runtime dependencies. It does
+no network access. You can run it straight from a source checkout:
+
+```
+python -m toolreplay version
+```
+
+Or install the console script and call it by name:
+
+```
+pip install .
