@@ -43,3 +43,14 @@ The scope check is a separate command, because scope needs a declared permission
 replay does not. Run against the same session and the shipped scope file, it finds the one
 call that stepped outside the agent's declared tools:
 
+```
+$ python -m toolreplay scope samples/session-dirty.jsonl samples/scope.json
+calls: 6
+findings: 1
+index 4: permission-overreach: tool 'write_file' is not in the declared scope for agent 'docs-reader'
+```
+
+Between replay and scope, all three finding types this tool detects are present in that one
+six-line sample.
+
+## Install
