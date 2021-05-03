@@ -77,3 +77,15 @@ toolreplay 0.6.0
 ```
 
 ## Commands
+
+| Command                        | What it does                                                    | Reads            |
+| ------------------------------ | --------------------------------------------------------------- | ---------------- |
+| `seal <transcript>`            | Print the hash-chained sealed transcript as JSONL               | a transcript     |
+| `replay <transcript>`          | Report non-determinism, redundant calls, and the divergence     | a transcript     |
+| `verify <sealed>`              | Recompute the chain and report the first broken link            | a sealed file    |
+| `scope <transcript> <scope>`   | Check every call against a declared scope file                  | transcript+scope |
+| `version`                      | Print the version                                               | nothing          |
+
+`replay` and `scope` are deliberately separate. Replay judges a session against itself and
+needs no external input. Scope judges a session against a permission declaration you supply,
+so it takes a second file. Keeping them apart means you can replay a session you have no
