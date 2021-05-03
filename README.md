@@ -66,3 +66,14 @@ Or install the console script and call it by name:
 
 ```
 pip install .
+toolreplay version
+```
+
+Both print the same line:
+
+```
+$ python -m toolreplay version
+toolreplay 0.6.0
+```
+
+## Commands
