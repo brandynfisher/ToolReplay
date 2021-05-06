@@ -123,3 +123,15 @@ rather miss a redundancy than invent one.
 Real example: index 1 and index 2 are both `read_file` on `docs/intro.md`, adjacent, with
 nothing between them. The second read learned nothing the first did not, so index 2 is
 flagged redundant. Note the contrast at the file level: index 4 writes the same file, so a
+later read after index 4 would not be redundant, because the write may have moved the world.
+
+Why it matters for an agent: redundant calls are wasted tokens and wasted latency, and they
+often mean the agent lost track of what it already knew. One repeat is cheap. A loop of
+repeats is a stuck agent burning budget.
+
+### Permission overreach
+
+Rule: each call's tool name is compared against the `allowed_tools` list in the scope file,
+matched exactly and case-sensitively. Any tool not in the list is overreach. A scope that
+quietly accepted near-matches like `Read_File` for `read_file` would not be a scope, so the
+match is strict.
