@@ -100,3 +100,15 @@ reason it matters when the transcript came from an agent rather than a person.
 
 Rule: the first time a call appears, its recorded response is remembered. If the same call
 (same tool name, same arguments after canonical JSON encoding) appears again with a
+different recorded response, that is non-determinism. The first such index becomes the
+divergence point.
+
+Real example: index 3 and index 5 are both `search` for `install`. Index 3 recorded
+`{"hits": 3}` and index 5 recorded `{"hits": 7}`. Those are the same question with two
+answers, so the tool reports non-determinism at index 5 and marks it the divergence point.
+
+Why it matters for an agent: an agent that asks the same question twice and gets two answers
+cannot be replayed or debugged reliably. The step that used the first answer may have made a
+decision that the second answer would have changed. Non-determinism is the signal that a
+session's outcome depends on something outside the recorded inputs.
+
