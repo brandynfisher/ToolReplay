@@ -112,3 +112,14 @@ cannot be replayed or debugged reliably. The step that used the first answer may
 decision that the second answer would have changed. Non-determinism is the signal that a
 session's outcome depends on something outside the recorded inputs.
 
+### Redundant call
+
+Rule: two identical calls are redundant only when nothing between them could have changed
+state. A call is a possible state change if its tool is a mutator, or if it is any call
+different from the repeated one. The default mutators are `write_file`, `delete_file`,
+`create_file`, `move_file`, and `run_command`. This is deliberately conservative: it would
+rather miss a redundancy than invent one.
+
+Real example: index 1 and index 2 are both `read_file` on `docs/intro.md`, adjacent, with
+nothing between them. The second read learned nothing the first did not, so index 2 is
+flagged redundant. Note the contrast at the file level: index 4 writes the same file, so a
