@@ -135,3 +135,15 @@ Rule: each call's tool name is compared against the `allowed_tools` list in the 
 matched exactly and case-sensitively. Any tool not in the list is overreach. A scope that
 quietly accepted near-matches like `Read_File` for `read_file` would not be a scope, so the
 match is strict.
+
+Real example: `samples/scope.json` permits `read_file`, `list_dir`, and `search` for the
+agent `docs-reader`. Index 4 calls `write_file`, which is not on the list, so it is reported
+as overreach for `docs-reader`.
+
+Why it matters for an agent: a read-only agent that writes a file has exceeded the authority
+it was given, whether through a prompt injection, a planning error, or a misconfigured tool
+set. Overreach is the audit result that maps directly to a security question: did this agent
+only do what it was allowed to do?
+
+## The transcript format
+
