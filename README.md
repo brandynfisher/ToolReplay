@@ -147,3 +147,14 @@ only do what it was allowed to do?
 
 ## The transcript format
 
+A transcript is a JSON Lines file. Each non-blank line is one tool invocation, a JSON object
+with exactly four fields and no others.
+
+| Field      | Type    | Meaning                                                              |
+| ---------- | ------- | -------------------------------------------------------------------- |
+| `index`    | integer | Position in the session, starting at 0, increasing by exactly 1      |
+| `tool`     | string  | The name of the tool that was called                                 |
+| `args`     | object  | The arguments passed to the tool                                     |
+| `response` | object  | The response the tool returned, as recorded                          |
+
+Parsing is strict, and the strictness is the point. An unknown field, a missing required
