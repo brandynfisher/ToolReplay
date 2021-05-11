@@ -158,3 +158,15 @@ with exactly four fields and no others.
 | `response` | object  | The response the tool returned, as recorded                          |
 
 Parsing is strict, and the strictness is the point. An unknown field, a missing required
+field, a non-integer index, a non-object `args` or `response`, or an index that is out of
+order is a hard error. A boolean is not accepted where an integer is required, since `true`
+is an `int` subclass in Python and would otherwise slip through. An audit tool that silently
+repairs its input cannot be trusted to report what the input actually said, so it refuses
+instead.
+
+Two calls are considered identical when their canonical call strings match. The canonical
+call string is the JSON encoding of `{"tool": ..., "args": ...}` with sorted keys and no
+incidental whitespace, so `{"x": 1, "y": 2}` and `{"y": 2, "x": 1}` are the same call. The
+canonical response is encoded the same way, which is how non-determinism is detected exactly
+rather than by loose comparison.
+
