@@ -170,3 +170,14 @@ incidental whitespace, so `{"x": 1, "y": 2}` and `{"y": 2, "x": 1}` are the same
 canonical response is encoded the same way, which is how non-determinism is detected exactly
 rather than by loose comparison.
 
+Here is one real line from the dirty sample, the write that triggers overreach:
+
+```
+{"index": 4, "tool": "write_file", "args": {"path": "docs/intro.md", "text": "edited"}, "response": {"ok": true}}
+```
+
+## Sealing and the hash chain
+
+`seal` turns the transcript into a chain of links. The digest of link N is a SHA-256 over
+the previous digest plus the canonical bytes of record N (its `prev`, `index`, `tool`,
+`args`, and `response`, encoded with sorted keys). The genesis link's previous digest is 64
