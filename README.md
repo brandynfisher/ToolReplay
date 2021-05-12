@@ -228,3 +228,14 @@ A scope file is a single JSON object declaring which tools one agent may call.
 | `allowed_tools` | array of string | The exact tool names the agent is permitted to call |
 
 The shipped example, `samples/scope.json`, is one line:
+
+```
+{"agent": "docs-reader", "allowed_tools": ["read_file", "list_dir", "search"]}
+```
+
+A missing `agent`, a missing `allowed_tools`, a non-string agent, a non-array tool list, or
+a non-string entry in the list is a hard error. As with the transcript, the parser refuses
+malformed scope rather than guessing.
+
+## Output format
+
