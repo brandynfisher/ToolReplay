@@ -181,3 +181,15 @@ Here is one real line from the dirty sample, the write that triggers overreach:
 `seal` turns the transcript into a chain of links. The digest of link N is a SHA-256 over
 the previous digest plus the canonical bytes of record N (its `prev`, `index`, `tool`,
 `args`, and `response`, encoded with sorted keys). The genesis link's previous digest is 64
+zero hex characters. Because each digest folds in the one before it, changing any earlier
+record changes every later digest.
+
+```
+$ python -m toolreplay seal samples/session-dirty.jsonl
+{"args":{"path":"docs"},"digest":"c1bd7fb3e28ce29e5c9dbd0cf47cafcaa1613295be26d86fb04463fe3d8b40da","index":0,"prev":"0000000000000000000000000000000000000000000000000000000000000000","response":{"entries":["intro.md","guide.md"]},"tool":"list_dir"}
+... four links trimmed ...
+{"args":{"query":"install"},"digest":"75ccf1faad88c5ea82c68139b2ec2a02943142dd0133bb0c626ccbff28f5c711","index":5,"prev":"327da75f2d491267f1dbeaf5d31b4a61a2ed9e956a71a5c4cbb67a87b4720d6a","response":{"hits":7},"tool":"search"}
+```
+
+`verify` recomputes the chain and checks two things per link: that its stored previous
+digest equals the digest of the link before it, and that its stored digest equals the digest
