@@ -193,3 +193,14 @@ $ python -m toolreplay seal samples/session-dirty.jsonl
 
 `verify` recomputes the chain and checks two things per link: that its stored previous
 digest equals the digest of the link before it, and that its stored digest equals the digest
+recomputed from its record. An intact chain reports so and exits 0:
+
+```
+$ python -m toolreplay verify sealed.jsonl
+chain: intact
+```
+
+Tamper with any recorded response and re-verify, and the chain reports the first link that
+no longer matches. This run changed `"hits":3` to `"hits":4` at index 3 before verifying:
+
+```
