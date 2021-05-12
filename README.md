@@ -204,3 +204,15 @@ Tamper with any recorded response and re-verify, and the chain reports the first
 no longer matches. This run changed `"hits":3` to `"hits":4` at index 3 before verifying:
 
 ```
+$ python -m toolreplay verify tampered.jsonl
+chain: broken
+first broken link: index 3
+expected: 34d19a9dfb112baa07afa37994ddcbbebe2973674385f3942340653d08d205bd
+found: 40aadf3b8156217f0b5b1d95010b6b79f82a26ccf5e780aed0f5f311f865028a
+```
+
+What the chain does detect: any change to a record's index, tool, args, or response, and any
+change to the ordering, because those change the digests. What it does not detect: it is not
+a signature. Anyone who can edit the file can also re-seal it and produce a fresh, internally
+consistent chain. The chain proves that a sealed file has not been edited since it was
+sealed, not that the person who sealed it was honest. For that you would sign the final
