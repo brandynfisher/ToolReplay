@@ -216,3 +216,15 @@ change to the ordering, because those change the digests. What it does not detec
 a signature. Anyone who can edit the file can also re-seal it and produce a fresh, internally
 consistent chain. The chain proves that a sealed file has not been edited since it was
 sealed, not that the person who sealed it was honest. For that you would sign the final
+digest with a key the tool does not manage.
+
+## Scope declaration format
+
+A scope file is a single JSON object declaring which tools one agent may call.
+
+| Field           | Type            | Meaning                                          |
+| --------------- | --------------- | ------------------------------------------------ |
+| `agent`         | string          | The name of the agent the scope applies to       |
+| `allowed_tools` | array of string | The exact tool names the agent is permitted to call |
+
+The shipped example, `samples/scope.json`, is one line:
