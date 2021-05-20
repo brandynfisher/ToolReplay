@@ -239,3 +239,15 @@ malformed scope rather than guessing.
 
 ## Output format
 
+Every command prints a line-oriented report with no timestamps and no randomness, so two
+runs on the same input diff to nothing.
+
+The `replay` report is a three-line header followed by one line per finding:
+
+| Line              | Meaning                                                       |
+| ----------------- | ------------------------------------------------------------- |
+| `calls: N`        | Number of records parsed                                      |
+| `divergence: ...` | `none`, or `index N` for the first non-determinism            |
+| `findings: N`     | Count of findings that follow                                 |
+| finding lines     | `index N: <kind>: <detail>`, sorted by index then kind        |
+
