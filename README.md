@@ -274,3 +274,14 @@ The split between 1 and 2 matters in automation. Exit 1 means the tool ran and h
 to report. Exit 2 means the tool could not run, for example because a file was missing or a
 transcript would not parse, so a build should treat the two differently.
 
+## Using it in CI
+
+Because the commands exit non-zero on findings, they gate directly. A step that fails the
+build when an agent transcript diverges or oversteps its scope is just the command itself:
+
+```
+python -m toolreplay replay session.jsonl
+python -m toolreplay scope session.jsonl scope.json
+```
+
+Because the reports are deterministic and free of timestamps, you can also commit a sealed
