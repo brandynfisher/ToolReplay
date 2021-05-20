@@ -262,3 +262,15 @@ The `scope` report drops the divergence line, since scope has no notion of repla
 The `verify` report is either the single line `chain: intact`, or four lines naming the
 first broken link and the expected and found digests, as shown in the sealing section.
 
+## Exit codes
+
+| Code | Meaning                                                                 |
+| ---- | ----------------------------------------------------------------------- |
+| 0    | Clean: no findings, or an intact chain                                  |
+| 1    | Findings present, or a broken chain                                     |
+| 2    | Usage error: a malformed transcript or scope, or a missing file         |
+
+The split between 1 and 2 matters in automation. Exit 1 means the tool ran and has something
+to report. Exit 2 means the tool could not run, for example because a file was missing or a
+transcript would not parse, so a build should treat the two differently.
+
