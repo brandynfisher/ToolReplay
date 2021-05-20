@@ -251,3 +251,14 @@ The `replay` report is a three-line header followed by one line per finding:
 | `findings: N`     | Count of findings that follow                                 |
 | finding lines     | `index N: <kind>: <detail>`, sorted by index then kind        |
 
+The `scope` report drops the divergence line, since scope has no notion of replay order:
+
+| Line          | Meaning                          |
+| ------------- | -------------------------------- |
+| `calls: N`    | Number of records parsed         |
+| `findings: N` | Count of overreach findings      |
+| finding lines | `index N: permission-overreach: <detail>` |
+
+The `verify` report is either the single line `chain: intact`, or four lines naming the
+first broken link and the expected and found digests, as shown in the sealing section.
+
