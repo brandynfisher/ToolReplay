@@ -285,3 +285,15 @@ python -m toolreplay scope session.jsonl scope.json
 ```
 
 Because the reports are deterministic and free of timestamps, you can also commit a sealed
+transcript and diff two runs in git. Seal each run to a file and compare:
+
+```
+python -m toolreplay seal run-a.jsonl > run-a.sealed.jsonl
+python -m toolreplay seal run-b.jsonl > run-b.sealed.jsonl
+git --no-pager diff --no-index run-a.sealed.jsonl run-b.sealed.jsonl
+```
+
+The first line that differs is the first call where the two runs stopped agreeing, and its
+digest changing tells you every later line changed too.
+
+## Limitations
