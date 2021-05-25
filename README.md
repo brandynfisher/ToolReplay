@@ -297,3 +297,14 @@ The first line that differs is the first call where the two runs stopped agreein
 digest changing tells you every later line changed too.
 
 ## Limitations
+
+These are real and intended. The tool is honest about what it cannot see.
+
+- It replays recorded responses. It does not call real tools. Everything it reports comes
+  from what the transcript already captured, so a problem that was never recorded cannot be
+  found.
+- Redundancy detection assumes no hidden state change. It only knows about state changes it
+  can see: mutator calls and differing calls between two identical reads. If some tool
+  outside the mutator list changes state, or if the world changes without any recorded call
+  (another process editing a file, for example), a later identical read may be flagged
+  redundant when it genuinely was not.
