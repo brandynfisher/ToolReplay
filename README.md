@@ -308,3 +308,15 @@ These are real and intended. The tool is honest about what it cannot see.
   outside the mutator list changes state, or if the world changes without any recorded call
   (another process editing a file, for example), a later identical read may be flagged
   redundant when it genuinely was not.
+- Non-determinism is detected only between calls that are byte-identical after canonical JSON
+  encoding. It cannot judge whether two different responses are semantically equivalent, and
+  it cannot detect non-determinism in a call that never repeats.
+- The mutator list is fixed. A custom mutating tool that is not in the default set is treated
+  as read-only for the purpose of redundancy.
+- Scope checking is name-based only. It does not inspect arguments, so it cannot catch a
+  permitted tool used on a forbidden target, such as `read_file` on a path outside the
+  agent's area.
+- Sealing is not a signature. It detects edits after sealing, not a dishonest sealer, as
+  described above.
+
+## Design decisions
