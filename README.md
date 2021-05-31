@@ -332,3 +332,14 @@ Why replay against recorded responses rather than live calls. Calling the real t
 an audit would make the audit itself non-deterministic and side-effecting: it might write
 files, hit networks, or return different answers than the run being audited. It would also
 require the tools to be available and identically configured at audit time. Replaying against
+the recording keeps the audit pure, reproducible, and safe to run anywhere, and it matches
+the actual question being asked, which is whether the recorded session is internally
+consistent, not whether the tools behave today.
+
+Why strict parsing that refuses malformed input. An audit tool's value is that you can trust
+its report. A parser that silently drops an unknown field or repairs an out-of-order index
+would be reporting on a session slightly different from the one on disk. Refusing malformed
+input keeps the report faithful to the file.
+
+Why deterministic, timestamp-free reports. The reports are meant to be committed, diffed, and
+compared across runs. Any timestamp or nondeterministic ordering would make identical
