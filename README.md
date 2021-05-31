@@ -320,3 +320,15 @@ These are real and intended. The tool is honest about what it cannot see.
   described above.
 
 ## Design decisions
+
+Why JSON Lines rather than a single JSON array. A transcript is an append-only log: one line
+is written per tool call as the session runs. JSON Lines lets a producer append a line
+without rewriting or re-parsing the whole file, lets a reader stream line by line, and makes
+git diffs land on the exact call that changed rather than reflowing an entire array. The
+cost is that the file is not a single valid JSON document, which is a price worth paying for
+a log format.
+
+Why replay against recorded responses rather than live calls. Calling the real tools during
+an audit would make the audit itself non-deterministic and side-effecting: it might write
+files, hit networks, or return different answers than the run being audited. It would also
+require the tools to be available and identically configured at audit time. Replaying against
