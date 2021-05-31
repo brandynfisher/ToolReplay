@@ -355,3 +355,14 @@ toolreplay/
   CHANGELOG.md              release notes, currently 0.6.0
   LICENSE                   MIT license text
   .gitignore                ignore rules for the checkout
+  src/toolreplay/
+    __init__.py             package docstring and __version__
+    __main__.py             entry point for python -m toolreplay
+    transcript.py           JSONL session records and strict parsing
+    chain.py                SHA-256 chaining, sealing, and verification
+    replay.py               deterministic re-execution against recorded responses
+    scope.py                declared tool scope parsing and overreach detection
+    findings.py             finding types and deterministic ordering
+    report.py               line-oriented report rendering
+    cli.py                  argparse CLI with the five subcommands
+  tests/
