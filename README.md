@@ -343,3 +343,15 @@ input keeps the report faithful to the file.
 
 Why deterministic, timestamp-free reports. The reports are meant to be committed, diffed, and
 compared across runs. Any timestamp or nondeterministic ordering would make identical
+sessions produce different reports, defeating the diff. Findings are sorted by index then by
+a fixed kind order for the same reason.
+
+## Repository layout
+
+```
+toolreplay/
+  pyproject.toml            package metadata, console script, Python 3.11 floor
+  README.md                 this file
+  CHANGELOG.md              release notes, currently 0.6.0
+  LICENSE                   MIT license text
+  .gitignore                ignore rules for the checkout
