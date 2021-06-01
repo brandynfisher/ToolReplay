@@ -366,3 +366,15 @@ toolreplay/
     report.py               line-oriented report rendering
     cli.py                  argparse CLI with the five subcommands
   tests/
+    test_transcript.py      parsing rules and canonical call encoding
+    test_chain.py           genesis, chaining, tamper detection, round-trip
+    test_replay.py          non-determinism and redundancy, including samples
+    test_scope.py           scope parsing and overreach, including samples
+    test_cli.py             end-to-end command behaviour and exit codes
+  samples/
+    README.md               description of the hand-authored fixtures
+    scope.json              docs-reader scope permitting read_file, list_dir, search
+    session-clean.jsonl     four calls that replay clean and stay in scope
+    session-dirty.jsonl     six calls, one of each finding type
+  docs/assets/
+    logo.svg                the wordmark
