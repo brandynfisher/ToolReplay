@@ -378,3 +378,14 @@ toolreplay/
     session-dirty.jsonl     six calls, one of each finding type
   docs/assets/
     logo.svg                the wordmark
+    replay-divergence.svg   the dirty session drawn as a chain with real digests
+```
+
+## Identity
+
+<img src="docs/assets/logo.svg" width="200" alt="toolreplay wordmark: the name split so that &quot;tool&quot; is ink and &quot;replay&quot; is teal, above a row of three linked blocks where the third block is red and carries a small amber marker.">
+
+The mark is a small hash chain, drawn literally. Three linked blocks stand for tool-call
+records sealed into a chain. The first two are the calm slate-teal that marks a link
+replaying as expected. The third is clay-red, the colour this project uses for a finding, the
+thing that breaks a clean replay. A single amber dot sits above that third block, the one
