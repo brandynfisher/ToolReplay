@@ -389,3 +389,15 @@ The mark is a small hash chain, drawn literally. Three linked blocks stand for t
 records sealed into a chain. The first two are the calm slate-teal that marks a link
 replaying as expected. The third is clay-red, the colour this project uses for a finding, the
 thing that breaks a clean replay. A single amber dot sits above that third block, the one
+accent in the whole palette, marking the diverged link you should look at first. The wordmark
+carries the same idea: `tool` is drawn in ink and `replay` in teal, split at the boundary
+between the two halves of the name, the same boundary the tool watches for divergence. The
+diagram in `docs/assets/replay-divergence.svg` uses the same three colours on the real six
+links of the dirty sample, and the digests printed on it are the exact ones `seal` produces
+above.
+
+## Glossary
+
+| Term             | Meaning in toolreplay                                                    |
+| ---------------- | ------------------------------------------------------------------------ |
+| Transcript       | A JSON Lines file, one tool invocation per line                          |
