@@ -5,3 +5,5 @@ build-backend = "setuptools.build_meta"
 [project]
 name = "toolreplay"
 version = "0.6.0"
+description = "Audit AI agent tool-call traces by hash-chaining and deterministic replay."
+readme = "README.md"
