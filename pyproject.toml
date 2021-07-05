@@ -9,3 +9,5 @@ description = "Audit AI agent tool-call traces by hash-chaining and deterministi
 readme = "README.md"
 requires-python = ">=3.11"
 license = { text = "MIT" }
+authors = [{ name = "Matthew0822", email = "15010780+Matthew0822@users.noreply.github.com" }]
+keywords = ["audit", "tool-call", "replay", "hash-chain", "determinism"]
