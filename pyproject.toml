@@ -12,3 +12,5 @@ license = { text = "MIT" }
 authors = [{ name = "Matthew0822", email = "15010780+Matthew0822@users.noreply.github.com" }]
 keywords = ["audit", "tool-call", "replay", "hash-chain", "determinism"]
 
+[project.scripts]
+toolreplay = "toolreplay.cli:main"
