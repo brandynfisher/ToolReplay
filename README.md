@@ -401,3 +401,53 @@ above.
 | Term             | Meaning in toolreplay                                                    |
 | ---------------- | ------------------------------------------------------------------------ |
 | Transcript       | A JSON Lines file, one tool invocation per line                          |
+| Record           | One parsed line: index, tool, args, response                             |
+| Canonical call   | The JSON of tool and args with sorted keys, used to compare calls        |
+| Seal             | Turn records into a hash chain of links                                  |
+| Link             | One sealed record with its previous digest and its own digest            |
+| Genesis          | The starting previous-digest, 64 zero hex characters                     |
+| Divergence       | The first index where a deterministic re-run disagrees with the record   |
+| Non-determinism  | An identical call with a different recorded response                     |
+| Redundant call   | An identical call with no possible state change between the two          |
+| Mutator          | A tool assumed to change state, so a later read is not redundant         |
+| Overreach        | A call to a tool outside the declared scope                              |
+| Scope            | A JSON declaration of the tools one agent may call                       |
+| Finding          | One audit result tied to a call index                                    |
+
+## Verification
+
+The suite is stdlib `unittest`, no third-party test dependency. From the project root with
+`src` on the path:
+
+```
+$ python -m unittest discover -s tests
+...
+Ran 34 tests in 0.019s
+
+OK
+```
+
+The 34 tests break down as 7 in `test_transcript.py`, 7 in `test_chain.py`, 6 in
+`test_replay.py`, 6 in `test_scope.py`, and 8 in `test_cli.py`. They cover strict parsing and
+canonical encoding, the genesis link and chaining and tamper detection and round-trip
+serialisation, non-determinism and redundancy including the mutation-between-reads case and
+both shipped samples, scope parsing and case-sensitive overreach on both samples, and the
+five CLI commands end to end including exit codes and the missing-file error. The timing is
+from one run on an unspecified machine and is indicative, not a guarantee.
+
+## Roadmap
+
+Not promises, and not dated. Directions that fit the tool's scope:
+
+- Argument-aware scope, so a permitted tool used on a forbidden target can be caught.
+- A configurable mutator list, so custom mutating tools stop being treated as read-only.
+- An optional signature over the final chain digest, to close the gap between tamper
+  detection and provenance.
+- A machine-readable report format alongside the line-oriented one, for tools that would
+  rather parse JSON than text.
+
+## License
+
+MIT. See [`LICENSE`](LICENSE).
+
+<!-- draft note 1 -->
