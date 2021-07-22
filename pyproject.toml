@@ -14,3 +14,4 @@ keywords = ["audit", "tool-call", "replay", "hash-chain", "determinism"]
 
 [project.scripts]
 toolreplay = "toolreplay.cli:main"
+
