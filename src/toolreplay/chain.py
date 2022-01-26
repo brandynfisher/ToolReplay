@@ -24,3 +24,10 @@ class Link:
 
     index: int
     prev: str
+    digest: str
+    record: Record
+
+
+def _digest(prev: str, record: Record) -> str:
+    payload = {
+        "prev": prev,
