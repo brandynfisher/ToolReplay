@@ -17,3 +17,10 @@ from toolreplay.transcript import Record
 
 GENESIS = "0" * 64
 
+
+@dataclass(frozen=True)
+class Link:
+    """One sealed record: its index, the record, and the running digest."""
+
+    index: int
+    prev: str
