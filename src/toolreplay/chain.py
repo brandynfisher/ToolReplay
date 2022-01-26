@@ -11,3 +11,9 @@ The genesis previous-digest is 64 zero hex characters.
 import hashlib
 import json
 from dataclasses import dataclass
+
+from toolreplay.transcript import Record
+
+
+GENESIS = "0" * 64
+
