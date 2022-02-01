@@ -31,3 +31,10 @@ class Link:
 def _digest(prev: str, record: Record) -> str:
     payload = {
         "prev": prev,
+        "index": record.index,
+        "tool": record.tool,
+        "args": record.args,
+        "response": record.response,
+    }
+    encoded = json.dumps(
+        payload,
