@@ -38,3 +38,10 @@ def _digest(prev: str, record: Record) -> str:
     }
     encoded = json.dumps(
         payload,
+        sort_keys=True,
+        separators=(",", ":"),
+        ensure_ascii=True,
+    ).encode("utf-8")
+    return hashlib.sha256(encoded).hexdigest()
+
+
