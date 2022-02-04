@@ -45,3 +45,9 @@ def _digest(prev: str, record: Record) -> str:
     return hashlib.sha256(encoded).hexdigest()
 
 
+def seal(records: list[Record]) -> list[Link]:
+    """Build the hash chain over an ordered list of records."""
+    links: list[Link] = []
+    prev = GENESIS
+    for record in records:
+        digest = _digest(prev, record)
