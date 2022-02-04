@@ -58,3 +58,10 @@ def seal(records: list[Record]) -> list[Link]:
 
 @dataclass(frozen=True)
 class VerifyResult:
+    """Outcome of verifying a sealed chain."""
+
+    ok: bool
+    broken_index: int | None
+    expected: str | None
+    found: str | None
+
