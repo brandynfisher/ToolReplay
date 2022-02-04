@@ -51,3 +51,10 @@ def seal(records: list[Record]) -> list[Link]:
     prev = GENESIS
     for record in records:
         digest = _digest(prev, record)
+        links.append(Link(index=record.index, prev=prev, digest=digest, record=record))
+        prev = digest
+    return links
+
+
+@dataclass(frozen=True)
+class VerifyResult:
