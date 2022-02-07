@@ -65,3 +65,10 @@ class VerifyResult:
     expected: str | None
     found: str | None
 
+
+def verify(links: list[Link]) -> VerifyResult:
+    """Recompute the chain and report the first link that does not match.
+
+    A link is valid when its stored digest equals the digest recomputed from
+    its stored previous digest and record, and its previous digest equals the
+    digest of the link before it.
