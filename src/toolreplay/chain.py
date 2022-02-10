@@ -85,3 +85,10 @@ def verify(links: list[Link]) -> VerifyResult:
 
 
 def links_to_jsonl(links: list[Link]) -> str:
+    """Serialise sealed links to JSONL text, one link per line.
+
+    Output is deterministic: sorted keys, no incidental whitespace, trailing
+    newline so the file diffs cleanly.
+    """
+    lines = []
+    for link in links:
