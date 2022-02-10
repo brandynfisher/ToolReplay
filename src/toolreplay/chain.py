@@ -78,3 +78,10 @@ def verify(links: list[Link]) -> VerifyResult:
         if link.prev != prev:
             return VerifyResult(False, link.index, prev, link.prev)
         recomputed = _digest(prev, link.record)
+        if recomputed != link.digest:
+            return VerifyResult(False, link.index, recomputed, link.digest)
+        prev = link.digest
+    return VerifyResult(True, None, None, None)
+
+
+def links_to_jsonl(links: list[Link]) -> str:
