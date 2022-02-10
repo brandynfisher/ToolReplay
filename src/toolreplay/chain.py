@@ -92,3 +92,10 @@ def links_to_jsonl(links: list[Link]) -> str:
     """
     lines = []
     for link in links:
+        obj = {
+            "index": link.index,
+            "prev": link.prev,
+            "digest": link.digest,
+            "tool": link.record.tool,
+            "args": link.record.args,
+            "response": link.record.response,
