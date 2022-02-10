@@ -72,3 +72,9 @@ def verify(links: list[Link]) -> VerifyResult:
     A link is valid when its stored digest equals the digest recomputed from
     its stored previous digest and record, and its previous digest equals the
     digest of the link before it.
+    """
+    prev = GENESIS
+    for link in links:
+        if link.prev != prev:
+            return VerifyResult(False, link.index, prev, link.prev)
+        recomputed = _digest(prev, link.record)
