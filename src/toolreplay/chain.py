@@ -99,3 +99,9 @@ def links_to_jsonl(links: list[Link]) -> str:
             "tool": link.record.tool,
             "args": link.record.args,
             "response": link.record.response,
+        }
+        lines.append(
+            json.dumps(obj, sort_keys=True, separators=(",", ":"), ensure_ascii=True)
+        )
+    return "\n".join(lines) + "\n"
+
