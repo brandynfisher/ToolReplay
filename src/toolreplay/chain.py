@@ -105,3 +105,10 @@ def links_to_jsonl(links: list[Link]) -> str:
         )
     return "\n".join(lines) + "\n"
 
+
+def load_sealed(path: str) -> list[Link]:
+    """Read a sealed JSONL file produced by `links_to_jsonl`."""
+    from toolreplay.transcript import TranscriptError
+
+    links: list[Link] = []
+    with open(path, "r", encoding="utf-8") as handle:
