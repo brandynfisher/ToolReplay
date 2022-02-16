@@ -15,3 +15,9 @@ tool that silently repairs its input cannot be trusted.
 
 import json
 from dataclasses import dataclass
+
+
+REQUIRED_FIELDS = ("index", "tool", "args", "response")
+
+
+class TranscriptError(ValueError):
