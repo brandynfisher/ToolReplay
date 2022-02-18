@@ -21,3 +21,9 @@ REQUIRED_FIELDS = ("index", "tool", "args", "response")
 
 
 class TranscriptError(ValueError):
+    """Raised when a transcript line cannot be parsed or is inconsistent."""
+
+
+@dataclass(frozen=True)
+class Record:
+    """One recorded tool invocation."""
