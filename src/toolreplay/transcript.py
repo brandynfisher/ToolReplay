@@ -39,3 +39,9 @@ class Record:
         Two calls with the same tool name and the same arguments produce the
         same canonical string, regardless of key ordering in the source JSON.
         """
+        return json.dumps(
+            {"tool": self.tool, "args": self.args},
+            sort_keys=True,
+            separators=(",", ":"),
+            ensure_ascii=True,
+        )
