@@ -57,3 +57,9 @@ class Record:
 
 
 def _parse_line(raw: str, line_no: int) -> Record:
+    try:
+        obj = json.loads(raw)
+    except json.JSONDecodeError as exc:
+        raise TranscriptError(f"line {line_no}: invalid JSON: {exc}") from exc
+
+    if not isinstance(obj, dict):
