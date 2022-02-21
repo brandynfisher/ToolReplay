@@ -51,3 +51,9 @@ class Record:
         return json.dumps(
             self.response,
             sort_keys=True,
+            separators=(",", ":"),
+            ensure_ascii=True,
+        )
+
+
+def _parse_line(raw: str, line_no: int) -> Record:
