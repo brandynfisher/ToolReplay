@@ -33,3 +33,9 @@ class Record:
     args: dict
     response: dict
 
+    def canonical_call(self) -> str:
+        """Return a stable string identifying the call (tool plus args).
+
+        Two calls with the same tool name and the same arguments produce the
+        same canonical string, regardless of key ordering in the source JSON.
+        """
