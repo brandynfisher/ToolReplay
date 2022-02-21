@@ -27,3 +27,9 @@ class TranscriptError(ValueError):
 @dataclass(frozen=True)
 class Record:
     """One recorded tool invocation."""
+
+    index: int
+    tool: str
+    args: dict
+    response: dict
+
