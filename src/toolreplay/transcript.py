@@ -45,3 +45,9 @@ class Record:
             separators=(",", ":"),
             ensure_ascii=True,
         )
+
+    def canonical_response(self) -> str:
+        """Return a stable string for the recorded response."""
+        return json.dumps(
+            self.response,
+            sort_keys=True,
