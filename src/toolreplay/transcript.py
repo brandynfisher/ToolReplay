@@ -86,3 +86,9 @@ def _parse_line(raw: str, line_no: int) -> Record:
     return Record(
         index=obj["index"],
         tool=obj["tool"],
+        args=obj["args"],
+        response=obj["response"],
+    )
+
+
+def parse_text(text: str) -> list[Record]:
