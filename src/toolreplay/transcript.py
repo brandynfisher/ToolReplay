@@ -74,3 +74,9 @@ def _parse_line(raw: str, line_no: int) -> Record:
         names = ", ".join(sorted(extra))
         raise TranscriptError(f"line {line_no}: unexpected field(s): {names}")
 
+    if not isinstance(obj["index"], int) or isinstance(obj["index"], bool):
+        raise TranscriptError(f"line {line_no}: index must be an integer")
+    if not isinstance(obj["tool"], str):
+        raise TranscriptError(f"line {line_no}: tool must be a string")
+    if not isinstance(obj["args"], dict):
+        raise TranscriptError(f"line {line_no}: args must be an object")
