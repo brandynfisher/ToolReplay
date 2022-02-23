@@ -69,3 +69,8 @@ def _parse_line(raw: str, line_no: int) -> Record:
         if field not in obj:
             raise TranscriptError(f"line {line_no}: missing field {field!r}")
 
+    extra = set(obj) - set(REQUIRED_FIELDS)
+    if extra:
+        names = ", ".join(sorted(extra))
+        raise TranscriptError(f"line {line_no}: unexpected field(s): {names}")
+
