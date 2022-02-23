@@ -80,3 +80,9 @@ def _parse_line(raw: str, line_no: int) -> Record:
         raise TranscriptError(f"line {line_no}: tool must be a string")
     if not isinstance(obj["args"], dict):
         raise TranscriptError(f"line {line_no}: args must be an object")
+    if not isinstance(obj["response"], dict):
+        raise TranscriptError(f"line {line_no}: response must be an object")
+
+    return Record(
+        index=obj["index"],
+        tool=obj["tool"],
