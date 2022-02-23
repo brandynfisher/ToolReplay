@@ -92,3 +92,9 @@ def _parse_line(raw: str, line_no: int) -> Record:
 
 
 def parse_text(text: str) -> list[Record]:
+    """Parse transcript text into an ordered list of records.
+
+    Indices must start at 0 and increase by exactly 1 with no gaps.
+    """
+    records: list[Record] = []
+    for line_no, raw in enumerate(text.splitlines(), start=1):
