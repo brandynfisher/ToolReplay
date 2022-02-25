@@ -2,3 +2,7 @@
 
 A Finding is a single audit result. Findings sort deterministically by
 (index, kind) so report output is byte-identical for identical input.
+"""
+
+from dataclasses import dataclass
+from functools import total_ordering
