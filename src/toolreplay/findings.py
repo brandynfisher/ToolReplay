@@ -9,3 +9,7 @@ from functools import total_ordering
 
 
 NON_DETERMINISM = "non-determinism"
+REDUNDANT_CALL = "redundant-call"
+OVERREACH = "permission-overreach"
+
+KIND_ORDER = {NON_DETERMINISM: 0, REDUNDANT_CALL: 1, OVERREACH: 2}
