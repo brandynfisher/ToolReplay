@@ -98,3 +98,18 @@ def parse_text(text: str) -> list[Record]:
     """
     records: list[Record] = []
     for line_no, raw in enumerate(text.splitlines(), start=1):
+        if not raw.strip():
+            continue
+        records.append(_parse_line(raw, line_no))
+
+    for expected, record in enumerate(records):
+        if record.index != expected:
+            raise TranscriptError(
+                f"index out of order: expected {expected}, got {record.index}"
+            )
+    return records
+
+
+def load(path: str) -> list[Record]:
+    """Read and parse a transcript file from disk."""
+    with open(path, "r", encoding="utf-8") as handle:
