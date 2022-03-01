@@ -6,3 +6,6 @@ A Finding is a single audit result. Findings sort deterministically by
 
 from dataclasses import dataclass
 from functools import total_ordering
+
+
+NON_DETERMINISM = "non-determinism"
