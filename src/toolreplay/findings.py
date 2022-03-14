@@ -17,3 +17,7 @@ KIND_ORDER = {NON_DETERMINISM: 0, REDUNDANT_CALL: 1, OVERREACH: 2}
 
 @total_ordering
 @dataclass(frozen=True)
+class Finding:
+    """One audit result tied to a call index."""
+
+    kind: str
