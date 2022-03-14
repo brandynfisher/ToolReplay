@@ -21,3 +21,7 @@ class Finding:
     """One audit result tied to a call index."""
 
     kind: str
+    index: int
+    detail: str
+
+    def _key(self):
