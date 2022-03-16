@@ -25,3 +25,6 @@ class Finding:
     detail: str
 
     def _key(self):
+        return (self.index, KIND_ORDER.get(self.kind, 99), self.detail)
+
+    def __lt__(self, other):
