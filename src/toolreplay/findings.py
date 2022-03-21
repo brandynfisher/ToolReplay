@@ -28,3 +28,7 @@ class Finding:
         return (self.index, KIND_ORDER.get(self.kind, 99), self.detail)
 
     def __lt__(self, other):
+        if not isinstance(other, Finding):
+            return NotImplemented
+        return self._key() < other._key()
+
