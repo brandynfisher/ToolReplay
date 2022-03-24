@@ -10,3 +10,12 @@ Replay also flags redundant calls: an identical call repeated with no
 intervening call that could have changed state. Here "state change" is modelled
 conservatively. Any call whose tool is listed as a mutator, or any call at all
 between two identical reads, counts as a possible state change. Two identical
+calls that are strictly adjacent in the transcript, or separated only by other
+identical reads, are redundant.
+
+The divergence index is the first index at which replay observes a
+non-determinism, because that is where a deterministic re-execution would first
+disagree with the record.
+"""
+
+from dataclasses import dataclass
