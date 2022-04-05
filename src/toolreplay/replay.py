@@ -27,3 +27,11 @@ from toolreplay.transcript import Record
 # Tools that change state. A call to any of these between two identical reads
 # means the second read is not redundant, because the world may have moved.
 DEFAULT_MUTATORS = frozenset(
+    {"write_file", "delete_file", "create_file", "move_file", "run_command"}
+)
+
+
+@dataclass(frozen=True)
+class ReplayResult:
+    """Result of replaying a session."""
+
