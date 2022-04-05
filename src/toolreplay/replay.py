@@ -19,3 +19,11 @@ disagree with the record.
 """
 
 from dataclasses import dataclass
+
+from toolreplay.findings import Finding, NON_DETERMINISM, REDUNDANT_CALL
+from toolreplay.transcript import Record
+
+
+# Tools that change state. A call to any of these between two identical reads
+# means the second read is not redundant, because the world may have moved.
+DEFAULT_MUTATORS = frozenset(
