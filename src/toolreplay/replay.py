@@ -35,3 +35,11 @@ DEFAULT_MUTATORS = frozenset(
 class ReplayResult:
     """Result of replaying a session."""
 
+    findings: list[Finding]
+    divergence_index: int | None
+    call_count: int
+
+
+def replay(records: list[Record], mutators: frozenset[str] = DEFAULT_MUTATORS) -> ReplayResult:
+    """Replay records against their recorded responses.
+
