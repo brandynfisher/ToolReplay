@@ -43,3 +43,11 @@ class ReplayResult:
 def replay(records: list[Record], mutators: frozenset[str] = DEFAULT_MUTATORS) -> ReplayResult:
     """Replay records against their recorded responses.
 
+    Returns findings for non-determinism and redundant calls, plus the first
+    index where replay diverged (the first non-determinism), or None if the
+    session replayed cleanly.
+    """
+    findings: list[Finding] = []
+    divergence_index: int | None = None
+
+    # Map canonical call -> recorded response first seen for it.
