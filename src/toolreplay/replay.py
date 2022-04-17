@@ -51,3 +51,11 @@ def replay(records: list[Record], mutators: frozenset[str] = DEFAULT_MUTATORS) -
     divergence_index: int | None = None
 
     # Map canonical call -> recorded response first seen for it.
+    seen_response: dict[str, str] = {}
+    # Map canonical call -> index it was last observed at.
+    last_seen_index: dict[str, int] = {}
+
+    for pos, record in enumerate(records):
+        call = record.canonical_call()
+        response = record.canonical_response()
+
