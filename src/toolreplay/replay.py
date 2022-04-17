@@ -59,3 +59,11 @@ def replay(records: list[Record], mutators: frozenset[str] = DEFAULT_MUTATORS) -
         call = record.canonical_call()
         response = record.canonical_response()
 
+        if call in seen_response:
+            if seen_response[call] != response:
+                findings.append(
+                    Finding(
+                        kind=NON_DETERMINISM,
+                        index=record.index,
+                        detail=(
+                            f"tool {record.tool!r} returned a different response "
