@@ -75,3 +75,12 @@ def replay(records: list[Record], mutators: frozenset[str] = DEFAULT_MUTATORS) -
                 if divergence_index is None:
                     divergence_index = record.index
             else:
+                # Identical response. Redundant if nothing between the two
+                # identical calls could have changed state.
+                prev_pos = None
+                for back in range(pos - 1, -1, -1):
+                    if records[back].canonical_call() == call:
+                        prev_pos = back
+                        break
+                if prev_pos is not None and _no_state_change_between(
+                    records, prev_pos, pos, call, mutators
