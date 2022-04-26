@@ -67,3 +67,11 @@ def replay(records: list[Record], mutators: frozenset[str] = DEFAULT_MUTATORS) -
                         index=record.index,
                         detail=(
                             f"tool {record.tool!r} returned a different response "
+                            f"than the identical call at index "
+                            f"{last_seen_index[call]}"
+                        ),
+                    )
+                )
+                if divergence_index is None:
+                    divergence_index = record.index
+            else:
