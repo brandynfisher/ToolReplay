@@ -84,3 +84,11 @@ def replay(records: list[Record], mutators: frozenset[str] = DEFAULT_MUTATORS) -
                         break
                 if prev_pos is not None and _no_state_change_between(
                     records, prev_pos, pos, call, mutators
+                ):
+                    findings.append(
+                        Finding(
+                            kind=REDUNDANT_CALL,
+                            index=record.index,
+                            detail=(
+                                f"tool {record.tool!r} repeats the identical call "
+                                f"at index {records[prev_pos].index} with no state "
