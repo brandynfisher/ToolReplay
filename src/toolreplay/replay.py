@@ -100,3 +100,11 @@ def replay(records: list[Record], mutators: frozenset[str] = DEFAULT_MUTATORS) -
             seen_response[call] = response
 
         last_seen_index[call] = record.index
+
+    return ReplayResult(
+        findings=findings,
+        divergence_index=divergence_index,
+        call_count=len(records),
+    )
+
+
