@@ -92,3 +92,11 @@ def replay(records: list[Record], mutators: frozenset[str] = DEFAULT_MUTATORS) -
                             detail=(
                                 f"tool {record.tool!r} repeats the identical call "
                                 f"at index {records[prev_pos].index} with no state "
+                                f"change between them"
+                            ),
+                        )
+                    )
+        else:
+            seen_response[call] = response
+
+        last_seen_index[call] = record.index
