@@ -18,3 +18,9 @@ from dataclasses import dataclass
 from toolreplay.findings import Finding, OVERREACH
 from toolreplay.transcript import Record
 
+
+class ScopeError(ValueError):
+    """Raised when a scope file is malformed."""
+
+
+@dataclass(frozen=True)
