@@ -24,3 +24,9 @@ class ScopeError(ValueError):
 
 
 @dataclass(frozen=True)
+class Scope:
+    """A declared permission scope for one agent."""
+
+    agent: str
+    allowed_tools: frozenset[str]
+
