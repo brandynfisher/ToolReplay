@@ -30,3 +30,9 @@ class Scope:
     agent: str
     allowed_tools: frozenset[str]
 
+    def permits(self, tool: str) -> bool:
+        return tool in self.allowed_tools
+
+
+def parse_text(text: str) -> Scope:
+    """Parse scope JSON text into a Scope."""
