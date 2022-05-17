@@ -36,3 +36,9 @@ class Scope:
 
 def parse_text(text: str) -> Scope:
     """Parse scope JSON text into a Scope."""
+    try:
+        obj = json.loads(text)
+    except json.JSONDecodeError as exc:
+        raise ScopeError(f"invalid scope JSON: {exc}") from exc
+
+    if not isinstance(obj, dict):
