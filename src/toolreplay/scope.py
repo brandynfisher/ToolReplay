@@ -12,3 +12,9 @@ are matched exactly, case-sensitively, because a scope that quietly accepts
 near-matches is not a scope.
 """
 
+import json
+from dataclasses import dataclass
+
+from toolreplay.findings import Finding, OVERREACH
+from toolreplay.transcript import Record
+
