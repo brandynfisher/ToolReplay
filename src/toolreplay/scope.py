@@ -42,3 +42,9 @@ def parse_text(text: str) -> Scope:
         raise ScopeError(f"invalid scope JSON: {exc}") from exc
 
     if not isinstance(obj, dict):
+        raise ScopeError("scope must be a JSON object")
+    if "agent" not in obj or not isinstance(obj["agent"], str):
+        raise ScopeError("scope must have a string field 'agent'")
+    if "allowed_tools" not in obj or not isinstance(obj["allowed_tools"], list):
+        raise ScopeError("scope must have an array field 'allowed_tools'")
+
