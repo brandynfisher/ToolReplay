@@ -48,3 +48,9 @@ def parse_text(text: str) -> Scope:
     if "allowed_tools" not in obj or not isinstance(obj["allowed_tools"], list):
         raise ScopeError("scope must have an array field 'allowed_tools'")
 
+    tools = []
+    for item in obj["allowed_tools"]:
+        if not isinstance(item, str):
+            raise ScopeError("every allowed_tools entry must be a string")
+        tools.append(item)
+
