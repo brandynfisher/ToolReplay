@@ -54,3 +54,9 @@ def parse_text(text: str) -> Scope:
             raise ScopeError("every allowed_tools entry must be a string")
         tools.append(item)
 
+    return Scope(agent=obj["agent"], allowed_tools=frozenset(tools))
+
+
+def load(path: str) -> Scope:
+    """Read and parse a scope file from disk."""
+    with open(path, "r", encoding="utf-8") as handle:
