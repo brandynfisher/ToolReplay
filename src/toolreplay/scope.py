@@ -60,3 +60,9 @@ def parse_text(text: str) -> Scope:
 def load(path: str) -> Scope:
     """Read and parse a scope file from disk."""
     with open(path, "r", encoding="utf-8") as handle:
+        return parse_text(handle.read())
+
+
+def detect_overreach(records: list[Record], scope: Scope) -> list[Finding]:
+    """Return one finding per call that uses a tool outside the scope."""
+    findings: list[Finding] = []
