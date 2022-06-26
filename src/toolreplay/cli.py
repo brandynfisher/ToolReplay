@@ -9,3 +9,11 @@ Subcommands:
 
 Exit codes: 0 clean, 1 findings present or chain broken, 2 usage error.
 """
+
+import argparse
+import sys
+
+from toolreplay import __version__
+from toolreplay import chain, replay, report, scope, transcript
+from toolreplay.transcript import TranscriptError
+from toolreplay.scope import ScopeError
