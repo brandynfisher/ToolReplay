@@ -17,3 +17,11 @@ from toolreplay import __version__
 from toolreplay import chain, replay, report, scope, transcript
 from toolreplay.transcript import TranscriptError
 from toolreplay.scope import ScopeError
+
+
+EXIT_CLEAN = 0
+EXIT_FINDINGS = 1
+EXIT_USAGE = 2
+
+
+def _load_records(path: str):
