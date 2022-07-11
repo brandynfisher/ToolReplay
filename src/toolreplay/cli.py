@@ -40,3 +40,11 @@ def cmd_replay(args) -> int:
     result = replay.replay(records)
     sys.stdout.write(
         report.render_report(result.findings, result.divergence_index, result.call_count)
+    )
+    return EXIT_FINDINGS if result.findings else EXIT_CLEAN
+
+
+def cmd_verify(args) -> int:
+    links = chain.load_sealed(args.sealed)
+    result = chain.verify(links)
+    sys.stdout.write(
