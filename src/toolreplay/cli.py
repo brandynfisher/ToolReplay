@@ -25,3 +25,11 @@ EXIT_USAGE = 2
 
 
 def _load_records(path: str):
+    return transcript.load(path)
+
+
+def cmd_seal(args) -> int:
+    records = _load_records(args.transcript)
+    links = chain.seal(records)
+    sys.stdout.write(chain.links_to_jsonl(links))
+    return EXIT_CLEAN
