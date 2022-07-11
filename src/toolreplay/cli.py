@@ -33,3 +33,10 @@ def cmd_seal(args) -> int:
     links = chain.seal(records)
     sys.stdout.write(chain.links_to_jsonl(links))
     return EXIT_CLEAN
+
+
+def cmd_replay(args) -> int:
+    records = _load_records(args.transcript)
+    result = replay.replay(records)
+    sys.stdout.write(
+        report.render_report(result.findings, result.divergence_index, result.call_count)
