@@ -56,3 +56,11 @@ def cmd_verify(args) -> int:
 
 
 def cmd_scope(args) -> int:
+    records = _load_records(args.transcript)
+    declared = scope.load(args.scope)
+    findings = scope.detect_overreach(records, declared)
+    sys.stdout.write(report.render_scope_report(findings, len(records)))
+    return EXIT_FINDINGS if findings else EXIT_CLEAN
+
+
+def cmd_version(args) -> int:
