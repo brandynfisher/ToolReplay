@@ -48,3 +48,11 @@ def cmd_verify(args) -> int:
     links = chain.load_sealed(args.sealed)
     result = chain.verify(links)
     sys.stdout.write(
+        report.render_verify_report(
+            result.ok, result.broken_index, result.expected, result.found
+        )
+    )
+    return EXIT_CLEAN if result.ok else EXIT_FINDINGS
+
+
+def cmd_scope(args) -> int:
