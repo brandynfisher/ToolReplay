@@ -64,3 +64,11 @@ def cmd_scope(args) -> int:
 
 
 def cmd_version(args) -> int:
+    sys.stdout.write(f"toolreplay {__version__}\n")
+    return EXIT_CLEAN
+
+
+def build_parser() -> argparse.ArgumentParser:
+    parser = argparse.ArgumentParser(
+        prog="toolreplay",
+        description="Audit AI agent tool-call traces by hash-chaining and deterministic replay.",
