@@ -72,3 +72,11 @@ def build_parser() -> argparse.ArgumentParser:
     parser = argparse.ArgumentParser(
         prog="toolreplay",
         description="Audit AI agent tool-call traces by hash-chaining and deterministic replay.",
+    )
+    sub = parser.add_subparsers(dest="command", required=True)
+
+    p_seal = sub.add_parser("seal", help="print the hash-chained sealed transcript")
+    p_seal.add_argument("transcript", help="path to a JSONL transcript")
+    p_seal.set_defaults(func=cmd_seal)
+
+    p_replay = sub.add_parser("replay", help="replay a transcript and report findings")
