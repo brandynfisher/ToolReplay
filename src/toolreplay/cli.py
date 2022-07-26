@@ -80,3 +80,11 @@ def build_parser() -> argparse.ArgumentParser:
     p_seal.set_defaults(func=cmd_seal)
 
     p_replay = sub.add_parser("replay", help="replay a transcript and report findings")
+    p_replay.add_argument("transcript", help="path to a JSONL transcript")
+    p_replay.set_defaults(func=cmd_replay)
+
+    p_verify = sub.add_parser("verify", help="verify a sealed chain is intact")
+    p_verify.add_argument("sealed", help="path to a sealed JSONL file")
+    p_verify.set_defaults(func=cmd_verify)
+
+    p_scope = sub.add_parser("scope", help="check a transcript against a declared scope")
