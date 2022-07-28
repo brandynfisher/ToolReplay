@@ -88,3 +88,10 @@ def build_parser() -> argparse.ArgumentParser:
     p_verify.set_defaults(func=cmd_verify)
 
     p_scope = sub.add_parser("scope", help="check a transcript against a declared scope")
+    p_scope.add_argument("transcript", help="path to a JSONL transcript")
+    p_scope.add_argument("scope", help="path to a scope JSON file")
+    p_scope.set_defaults(func=cmd_scope)
+
+    p_version = sub.add_parser("version", help="print the version")
+    p_version.set_defaults(func=cmd_version)
+
