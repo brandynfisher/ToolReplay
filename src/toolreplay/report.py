@@ -10,3 +10,6 @@ from toolreplay.findings import Finding, sort_findings
 def render_report(findings: list[Finding], divergence_index: int | None, call_count: int) -> str:
     """Render the audit report as line-oriented text."""
     ordered = sort_findings(findings)
+    lines = []
+    lines.append(f"calls: {call_count}")
+    if divergence_index is None:
