@@ -17,3 +17,7 @@ def render_report(findings: list[Finding], divergence_index: int | None, call_co
     else:
         lines.append(f"divergence: index {divergence_index}")
     lines.append(f"findings: {len(ordered)}")
+    for finding in ordered:
+        lines.append(finding.line())
+    return "\n".join(lines) + "\n"
+
