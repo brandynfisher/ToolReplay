@@ -21,3 +21,7 @@ def render_report(findings: list[Finding], divergence_index: int | None, call_co
         lines.append(finding.line())
     return "\n".join(lines) + "\n"
 
+
+def render_scope_report(findings: list[Finding], call_count: int) -> str:
+    """Render just the scope overreach findings."""
+    ordered = sort_findings(findings)
