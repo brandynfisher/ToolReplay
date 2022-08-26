@@ -29,3 +29,6 @@ def render_scope_report(findings: list[Finding], call_count: int) -> str:
     lines.append(f"calls: {call_count}")
     lines.append(f"findings: {len(ordered)}")
     for finding in ordered:
+        lines.append(finding.line())
+    return "\n".join(lines) + "\n"
+
