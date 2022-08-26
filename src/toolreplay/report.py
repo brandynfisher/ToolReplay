@@ -32,3 +32,7 @@ def render_scope_report(findings: list[Finding], call_count: int) -> str:
         lines.append(finding.line())
     return "\n".join(lines) + "\n"
 
+
+def render_verify_report(ok: bool, broken_index, expected, found) -> str:
+    """Render the chain verification result."""
+    if ok:
