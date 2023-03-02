@@ -112,3 +112,20 @@ def load_sealed(path: str) -> list[Link]:
 
     links: list[Link] = []
     with open(path, "r", encoding="utf-8") as handle:
+        text = handle.read()
+    for line_no, raw in enumerate(text.splitlines(), start=1):
+        if not raw.strip():
+            continue
+        obj = json.loads(raw)
+        for field in ("index", "prev", "digest", "tool", "args", "response"):
+            if field not in obj:
+                raise TranscriptError(f"line {line_no}: missing field {field!r}")
+        record = Record(
+            index=obj["index"],
+            tool=obj["tool"],
+            args=obj["args"],
+            response=obj["response"],
+        )
+        links.append(
+            Link(index=obj["index"], prev=obj["prev"], digest=obj["digest"], record=record)
+        )
