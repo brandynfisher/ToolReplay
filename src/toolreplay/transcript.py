@@ -113,3 +113,4 @@ def parse_text(text: str) -> list[Record]:
 def load(path: str) -> list[Record]:
     """Read and parse a transcript file from disk."""
     with open(path, "r", encoding="utf-8") as handle:
+        return parse_text(handle.read())
