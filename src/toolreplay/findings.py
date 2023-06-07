@@ -32,3 +32,11 @@ class Finding:
             return NotImplemented
         return self._key() < other._key()
 
+    def line(self) -> str:
+        """One-line rendering for report output."""
+        return f"index {self.index}: {self.kind}: {self.detail}"
+
+
+def sort_findings(findings: list[Finding]) -> list[Finding]:
+    """Return findings in deterministic order."""
+    return sorted(findings)
