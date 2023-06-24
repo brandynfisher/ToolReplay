@@ -36,3 +36,11 @@ def render_scope_report(findings: list[Finding], call_count: int) -> str:
 def render_verify_report(ok: bool, broken_index, expected, found) -> str:
     """Render the chain verification result."""
     if ok:
+        return "chain: intact\n"
+    lines = [
+        "chain: broken",
+        f"first broken link: index {broken_index}",
+        f"expected: {expected}",
+        f"found: {found}",
+    ]
+    return "\n".join(lines) + "\n"
