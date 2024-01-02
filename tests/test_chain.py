@@ -21,3 +21,11 @@ class TestChain(unittest.TestCase):
 
     def test_chain_links_reference_previous_digest(self):
         links = chain.seal(_records(SAMPLE))
+        self.assertEqual(links[1].prev, links[0].digest)
+
+    def test_digest_is_deterministic(self):
+        a = chain.seal(_records(SAMPLE))
+        b = chain.seal(_records(SAMPLE))
+        self.assertEqual([l.digest for l in a], [l.digest for l in b])
+
+    def test_verify_intact_chain(self):
