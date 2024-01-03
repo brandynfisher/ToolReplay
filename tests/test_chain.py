@@ -45,3 +45,11 @@ class TestChain(unittest.TestCase):
         tampered[1] = Link(
             index=1, prev=tampered[1].prev, digest=tampered[1].digest, record=bad_record
         )
+        result = chain.verify(tampered)
+        self.assertFalse(result.ok)
+        self.assertEqual(result.broken_index, 1)
+
+    def test_verify_detects_broken_prev_link(self):
+        links = chain.seal(_records(SAMPLE))
+        tampered = list(links)
+        tampered[1] = Link(
