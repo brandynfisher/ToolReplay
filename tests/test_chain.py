@@ -29,3 +29,11 @@ class TestChain(unittest.TestCase):
         self.assertEqual([l.digest for l in a], [l.digest for l in b])
 
     def test_verify_intact_chain(self):
+        links = chain.seal(_records(SAMPLE))
+        result = chain.verify(links)
+        self.assertTrue(result.ok)
+        self.assertIsNone(result.broken_index)
+
+    def test_verify_detects_tampered_response(self):
+        links = chain.seal(_records(SAMPLE))
+        tampered = list(links)
