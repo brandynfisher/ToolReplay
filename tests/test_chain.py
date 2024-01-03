@@ -37,3 +37,11 @@ class TestChain(unittest.TestCase):
     def test_verify_detects_tampered_response(self):
         links = chain.seal(_records(SAMPLE))
         tampered = list(links)
+        from toolreplay.transcript import Record
+
+        bad_record = Record(
+            index=1, tool="read_file", args={"path": "a"}, response={"bytes": 999}
+        )
+        tampered[1] = Link(
+            index=1, prev=tampered[1].prev, digest=tampered[1].digest, record=bad_record
+        )
