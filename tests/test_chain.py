@@ -53,3 +53,10 @@ class TestChain(unittest.TestCase):
         links = chain.seal(_records(SAMPLE))
         tampered = list(links)
         tampered[1] = Link(
+            index=1, prev=GENESIS, digest=tampered[1].digest, record=tampered[1].record
+        )
+        result = chain.verify(tampered)
+        self.assertFalse(result.ok)
+        self.assertEqual(result.broken_index, 1)
+
+    def test_roundtrip_serialisation(self):
