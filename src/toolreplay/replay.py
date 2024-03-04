@@ -108,3 +108,21 @@ def replay(records: list[Record], mutators: frozenset[str] = DEFAULT_MUTATORS) -
     )
 
 
+def _no_state_change_between(
+    records: list[Record],
+    prev_pos: int,
+    pos: int,
+    call: str,
+    mutators: frozenset[str],
+) -> bool:
+    """True when nothing between prev_pos and pos could have changed state.
+
+    A mutator call between them, or any non-identical call, is treated as a
+    possible state change, so the later call is not considered redundant.
+    """
+    for between in range(prev_pos + 1, pos):
+        mid = records[between]
+        if mid.tool in mutators:
+            return False
+        if mid.canonical_call() != call:
+            return False
