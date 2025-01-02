@@ -14,3 +14,12 @@ def run(argv):
 
 
 class TestCli(unittest.TestCase):
+    def test_version(self):
+        code, out, _ = run(["version"])
+        self.assertEqual(code, 0)
+        self.assertTrue(out.startswith("toolreplay "))
+
+    def test_replay_clean_exit_zero(self):
+        code, out, _ = run(["replay", "samples/session-clean.jsonl"])
+        self.assertEqual(code, 0)
+        self.assertIn("divergence: none", out)
