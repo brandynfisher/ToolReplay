@@ -48,3 +48,12 @@ class TestCli(unittest.TestCase):
 
         _, sealed, _ = run(["seal", "samples/session-dirty.jsonl"])
         fd, path = tempfile.mkstemp(suffix=".jsonl")
+        try:
+            with os.fdopen(fd, "w", encoding="utf-8") as handle:
+                handle.write(sealed)
+            code, out, _ = run(["verify", path])
+            self.assertEqual(code, 0)
+            self.assertIn("chain: intact", out)
+        finally:
+            os.remove(path)
+
