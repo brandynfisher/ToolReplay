@@ -23,3 +23,11 @@ class TestCli(unittest.TestCase):
         code, out, _ = run(["replay", "samples/session-clean.jsonl"])
         self.assertEqual(code, 0)
         self.assertIn("divergence: none", out)
+        self.assertIn("findings: 0", out)
+
+    def test_replay_dirty_exit_one(self):
+        code, out, _ = run(["replay", "samples/session-dirty.jsonl"])
+        self.assertEqual(code, 1)
+        self.assertIn("divergence: index 5", out)
+        self.assertIn("redundant-call", out)
+        self.assertIn("non-determinism", out)
