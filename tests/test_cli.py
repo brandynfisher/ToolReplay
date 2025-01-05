@@ -31,3 +31,12 @@ class TestCli(unittest.TestCase):
         self.assertIn("divergence: index 5", out)
         self.assertIn("redundant-call", out)
         self.assertIn("non-determinism", out)
+
+    def test_scope_dirty_exit_one(self):
+        code, out, _ = run(["scope", "samples/session-dirty.jsonl", "samples/scope.json"])
+        self.assertEqual(code, 1)
+        self.assertIn("permission-overreach", out)
+        self.assertIn("index 4", out)
+
+    def test_scope_clean_exit_zero(self):
+        code, out, _ = run(["scope", "samples/session-clean.jsonl", "samples/scope.json"])
