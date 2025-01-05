@@ -40,3 +40,11 @@ class TestCli(unittest.TestCase):
 
     def test_scope_clean_exit_zero(self):
         code, out, _ = run(["scope", "samples/session-clean.jsonl", "samples/scope.json"])
+        self.assertEqual(code, 0)
+        self.assertIn("findings: 0", out)
+
+    def test_seal_then_verify_intact(self):
+        import tempfile, os
+
+        _, sealed, _ = run(["seal", "samples/session-dirty.jsonl"])
+        fd, path = tempfile.mkstemp(suffix=".jsonl")
