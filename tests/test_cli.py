@@ -57,3 +57,11 @@ class TestCli(unittest.TestCase):
         finally:
             os.remove(path)
 
+    def test_verify_detects_tamper(self):
+        import tempfile, os
+
+        _, sealed, _ = run(["seal", "samples/session-dirty.jsonl"])
+        tampered = sealed.replace('"hits":3', '"hits":4')
+        self.assertNotEqual(tampered, sealed)
+        fd, path = tempfile.mkstemp(suffix=".jsonl")
+        try:
