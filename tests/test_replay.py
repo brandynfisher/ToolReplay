@@ -12,3 +12,10 @@ class TestReplay(unittest.TestCase):
     def test_clean_session_has_no_findings(self):
         text = (
             '{"index": 0, "tool": "list_dir", "args": {"p": "a"}, "response": {"n": 2}}\n'
+            '{"index": 1, "tool": "read_file", "args": {"p": "b"}, "response": {"b": 1}}\n'
+            '{"index": 2, "tool": "search", "args": {"q": "x"}, "response": {"h": 3}}\n'
+        )
+        result = replay.replay(_records(text))
+        self.assertEqual(result.findings, [])
+        self.assertIsNone(result.divergence_index)
+
