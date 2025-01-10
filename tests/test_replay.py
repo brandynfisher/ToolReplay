@@ -26,3 +26,10 @@ class TestReplay(unittest.TestCase):
         )
         result = replay.replay(_records(text))
         kinds = [f.kind for f in result.findings]
+        self.assertIn(NON_DETERMINISM, kinds)
+        self.assertEqual(result.divergence_index, 1)
+
+    def test_redundant_call_detected(self):
+        text = (
+            '{"index": 0, "tool": "read_file", "args": {"p": "a"}, "response": {"b": 1}}\n'
+            '{"index": 1, "tool": "read_file", "args": {"p": "a"}, "response": {"b": 1}}\n'
