@@ -33,3 +33,10 @@ class TestReplay(unittest.TestCase):
         text = (
             '{"index": 0, "tool": "read_file", "args": {"p": "a"}, "response": {"b": 1}}\n'
             '{"index": 1, "tool": "read_file", "args": {"p": "a"}, "response": {"b": 1}}\n'
+        )
+        result = replay.replay(_records(text))
+        kinds = [f.kind for f in result.findings]
+        self.assertIn(REDUNDANT_CALL, kinds)
+        self.assertIsNone(result.divergence_index)
+
+    def test_mutation_between_identical_reads_is_not_redundant(self):
