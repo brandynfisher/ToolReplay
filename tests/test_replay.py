@@ -19,3 +19,10 @@ class TestReplay(unittest.TestCase):
         self.assertEqual(result.findings, [])
         self.assertIsNone(result.divergence_index)
 
+    def test_non_determinism_detected(self):
+        text = (
+            '{"index": 0, "tool": "search", "args": {"q": "x"}, "response": {"h": 3}}\n'
+            '{"index": 1, "tool": "search", "args": {"q": "x"}, "response": {"h": 9}}\n'
+        )
+        result = replay.replay(_records(text))
+        kinds = [f.kind for f in result.findings]
