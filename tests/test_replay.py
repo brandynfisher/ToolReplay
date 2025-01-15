@@ -48,3 +48,10 @@ class TestReplay(unittest.TestCase):
         result = replay.replay(_records(text))
         self.assertEqual([f for f in result.findings if f.kind == REDUNDANT_CALL], [])
 
+    def test_dirty_sample_reports_expected_findings(self):
+        records = transcript.load("samples/session-dirty.jsonl")
+        result = replay.replay(records)
+        self.assertEqual(result.divergence_index, 5)
+        kinds = sorted({f.kind for f in result.findings})
+        self.assertEqual(kinds, [NON_DETERMINISM, REDUNDANT_CALL])
+        redundant = [f for f in result.findings if f.kind == REDUNDANT_CALL]
