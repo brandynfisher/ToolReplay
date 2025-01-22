@@ -37,3 +37,9 @@ class TestScope(unittest.TestCase):
         findings = scope.detect_overreach(_records(text), s)
         self.assertEqual(len(findings), 1)
         self.assertEqual(findings[0].kind, OVERREACH)
+        self.assertEqual(findings[0].index, 1)
+
+    def test_dirty_sample_overreach(self):
+        declared = scope.load("samples/scope.json")
+        records = transcript.load("samples/session-dirty.jsonl")
+        findings = scope.detect_overreach(records, declared)
