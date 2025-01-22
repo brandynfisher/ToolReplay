@@ -17,3 +17,9 @@ class TestScope(unittest.TestCase):
         self.assertFalse(s.permits("write_file"))
 
     def test_invalid_scope_rejected(self):
+        with self.assertRaises(ScopeError):
+            scope.parse_text('{"agent": "a"}')
+        with self.assertRaises(ScopeError):
+            scope.parse_text('{"allowed_tools": []}')
+        with self.assertRaises(ScopeError):
+            scope.parse_text("not json")
