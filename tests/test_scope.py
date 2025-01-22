@@ -23,3 +23,10 @@ class TestScope(unittest.TestCase):
             scope.parse_text('{"allowed_tools": []}')
         with self.assertRaises(ScopeError):
             scope.parse_text("not json")
+
+    def test_exact_case_sensitive_match(self):
+        s = scope.parse_text('{"agent": "a", "allowed_tools": ["read_file"]}')
+        self.assertFalse(s.permits("Read_File"))
+
+    def test_detect_overreach(self):
+        s = scope.parse_text('{"agent": "a", "allowed_tools": ["read_file"]}')
