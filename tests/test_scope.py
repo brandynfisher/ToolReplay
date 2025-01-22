@@ -30,3 +30,10 @@ class TestScope(unittest.TestCase):
 
     def test_detect_overreach(self):
         s = scope.parse_text('{"agent": "a", "allowed_tools": ["read_file"]}')
+        text = (
+            '{"index": 0, "tool": "read_file", "args": {}, "response": {}}\n'
+            '{"index": 1, "tool": "write_file", "args": {}, "response": {}}\n'
+        )
+        findings = scope.detect_overreach(_records(text), s)
+        self.assertEqual(len(findings), 1)
+        self.assertEqual(findings[0].kind, OVERREACH)
