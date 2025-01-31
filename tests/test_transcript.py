@@ -11,3 +11,10 @@ class TestTranscript(unittest.TestCase):
             '{"index": 1, "tool": "list_dir", "args": {"path": "b"}, "response": {"n": 2}}\n'
         )
         records = transcript.parse_text(text)
+        self.assertEqual(len(records), 2)
+        self.assertEqual(records[0].tool, "read_file")
+        self.assertEqual(records[1].index, 1)
+
+    def test_blank_lines_ignored(self):
+        text = (
+            '{"index": 0, "tool": "t", "args": {}, "response": {}}\n'
