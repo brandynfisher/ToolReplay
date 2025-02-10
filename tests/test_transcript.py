@@ -32,3 +32,10 @@ class TestTranscript(unittest.TestCase):
         text = '{"index": 0, "tool": "t", "args": {}, "response": {}, "extra": 1}\n'
         with self.assertRaises(TranscriptError):
             transcript.parse_text(text)
+
+    def test_out_of_order_index_rejected(self):
+        text = (
+            '{"index": 0, "tool": "t", "args": {}, "response": {}}\n'
+            '{"index": 5, "tool": "t", "args": {}, "response": {}}\n'
+        )
+        with self.assertRaises(TranscriptError):
