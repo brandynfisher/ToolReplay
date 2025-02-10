@@ -25,3 +25,10 @@ class TestTranscript(unittest.TestCase):
 
     def test_missing_field_rejected(self):
         text = '{"index": 0, "tool": "t", "args": {}}\n'
+        with self.assertRaises(TranscriptError):
+            transcript.parse_text(text)
+
+    def test_unexpected_field_rejected(self):
+        text = '{"index": 0, "tool": "t", "args": {}, "response": {}, "extra": 1}\n'
+        with self.assertRaises(TranscriptError):
+            transcript.parse_text(text)
