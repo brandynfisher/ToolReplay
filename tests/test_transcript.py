@@ -18,3 +18,10 @@ class TestTranscript(unittest.TestCase):
     def test_blank_lines_ignored(self):
         text = (
             '{"index": 0, "tool": "t", "args": {}, "response": {}}\n'
+            "\n"
+            '{"index": 1, "tool": "t", "args": {}, "response": {}}\n'
+        )
+        self.assertEqual(len(transcript.parse_text(text)), 2)
+
+    def test_missing_field_rejected(self):
+        text = '{"index": 0, "tool": "t", "args": {}}\n'
