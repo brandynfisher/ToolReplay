@@ -39,3 +39,10 @@ class TestTranscript(unittest.TestCase):
             '{"index": 5, "tool": "t", "args": {}, "response": {}}\n'
         )
         with self.assertRaises(TranscriptError):
+            transcript.parse_text(text)
+
+    def test_bool_index_rejected(self):
+        text = '{"index": true, "tool": "t", "args": {}, "response": {}}\n'
+        with self.assertRaises(TranscriptError):
+            transcript.parse_text(text)
+
