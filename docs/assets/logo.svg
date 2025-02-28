@@ -6,3 +6,7 @@
     marks a finding, the thing that breaks a clean replay. Amber (#8a5f08) is
     the single accent and appears once, on the exact link where replay diverged.
     Neutrals are ink (#1c2321) for text and paper (#f4f1ea) for the background.
+    No AI-default palette: no indigo, violet, cyan, or neon.
+  -->
+  <title id="title">toolreplay wordmark</title>
+  <desc id="desc">The name toolreplay split in colour at the compound boundary,
