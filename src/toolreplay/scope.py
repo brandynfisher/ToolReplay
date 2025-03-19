@@ -66,3 +66,15 @@ def load(path: str) -> Scope:
 def detect_overreach(records: list[Record], scope: Scope) -> list[Finding]:
     """Return one finding per call that uses a tool outside the scope."""
     findings: list[Finding] = []
+    for record in records:
+        if not scope.permits(record.tool):
+            findings.append(
+                Finding(
+                    kind=OVERREACH,
+                    index=record.index,
+                    detail=(
+                        f"tool {record.tool!r} is not in the declared scope for "
+                        f"agent {scope.agent!r}"
+                    ),
+                )
+            )
