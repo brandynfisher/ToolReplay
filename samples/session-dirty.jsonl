@@ -1,0 +1,6 @@
+{"index": 0, "tool": "list_dir", "args": {"path": "docs"}, "response": {"entries": ["intro.md", "guide.md"]}}
+{"index": 1, "tool": "read_file", "args": {"path": "docs/intro.md"}, "response": {"bytes": 214}}
+{"index": 2, "tool": "read_file", "args": {"path": "docs/intro.md"}, "response": {"bytes": 214}}
+{"index": 3, "tool": "search", "args": {"query": "install"}, "response": {"hits": 3}}
+{"index": 4, "tool": "write_file", "args": {"path": "docs/intro.md", "text": "edited"}, "response": {"ok": true}}
+{"index": 5, "tool": "search", "args": {"query": "install"}, "response": {"hits": 7}}
