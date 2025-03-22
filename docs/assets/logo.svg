@@ -10,3 +10,7 @@
   -->
   <title id="title">toolreplay wordmark</title>
   <desc id="desc">The name toolreplay split in colour at the compound boundary,
+    with a three block hash chain where the third block is marked as the
+    diverged link.</desc>
+
+  <rect x="0" y="0" width="240" height="96" fill="#f4f1ea"/>
