@@ -14,3 +14,8 @@
     diverged link.</desc>
 
   <rect x="0" y="0" width="240" height="96" fill="#f4f1ea"/>
+
+  <!-- Mark: three linked blocks, a literal hash chain. Third is the diverged link. -->
+  <g fill="none" stroke-width="1.5">
+    <rect x="16" y="20" width="24" height="24" rx="3" fill="#276b6b" stroke="#276b6b"/>
+    <rect x="52" y="20" width="24" height="24" rx="3" fill="#276b6b" stroke="#276b6b"/>
