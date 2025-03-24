@@ -19,3 +19,19 @@
   <g fill="none" stroke-width="1.5">
     <rect x="16" y="20" width="24" height="24" rx="3" fill="#276b6b" stroke="#276b6b"/>
     <rect x="52" y="20" width="24" height="24" rx="3" fill="#276b6b" stroke="#276b6b"/>
+    <rect x="88" y="20" width="24" height="24" rx="3" fill="#a5361f" stroke="#a5361f"/>
+    <!-- connectors between blocks, one stroke width per role -->
+    <line x1="40" y1="32" x2="52" y2="32" stroke="#1c2321" stroke-width="1"/>
+    <line x1="76" y1="32" x2="88" y2="32" stroke="#1c2321" stroke-width="1"/>
+    <!-- accent: the diverged link marker, the single place to look first -->
+    <circle cx="100" cy="14" r="3" fill="#8a5f08" stroke="none"/>
+    <line x1="100" y1="17" x2="100" y2="20" stroke="#8a5f08" stroke-width="1.5"/>
+  </g>
+
+  <!-- Wordmark: colour split at the tool | replay morpheme boundary -->
+  <g font-family="-apple-system, &quot;Segoe UI&quot;, Roboto, Helvetica, Arial, sans-serif"
+     font-size="30" font-weight="700">
+    <text x="16" y="76" fill="#1c2321">tool</text>
+    <text x="74" y="76" fill="#276b6b">replay</text>
+  </g>
+</svg>
