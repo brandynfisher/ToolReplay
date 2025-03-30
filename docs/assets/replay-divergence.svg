@@ -14,3 +14,10 @@
     its tool, its truncated SHA-256 digest, and its finding. Index 2 is a
     redundant call, index 4 is permission overreach, and index 5 is where replay
     diverged, marked with the amber accent.</desc>
+
+  <rect x="0" y="0" width="640" height="340" fill="#f4f1ea"/>
+
+  <!-- heading -->
+  <text x="24" y="34" fill="#1c2321" font-size="16" font-weight="700"
+        font-family="-apple-system, &quot;Segoe UI&quot;, Roboto, Helvetica, Arial, sans-serif">
+    samples/session-dirty.jsonl: replay diverged at index 5
