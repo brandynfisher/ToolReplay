@@ -6,3 +6,11 @@
     the two links that carry findings. Amber (#8a5f08) is the single accent and
     marks the one link where replay diverged, index 5. Neutrals are ink
     (#1c2321) for text and paper (#f4f1ea) for the background. No AI-default
+    palette. Numbers below are the real SHA-256 digests and findings printed by
+    the toolreplay CLI when sealing and replaying samples/session-dirty.jsonl.
+  -->
+  <title id="title">Replay divergence chain for the dirty sample session</title>
+  <desc id="desc">Six hash-chained tool calls, index 0 to 5, each labelled with
+    its tool, its truncated SHA-256 digest, and its finding. Index 2 is a
+    redundant call, index 4 is permission overreach, and index 5 is where replay
+    diverged, marked with the amber accent.</desc>
