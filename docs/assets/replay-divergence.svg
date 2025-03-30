@@ -1,0 +1,8 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 340" role="img"
+     aria-labelledby="title desc" width="640" height="340">
+  <!--
+    Palette reason: this diagram audits a hash chain of tool calls. Slate-teal
+    (#276b6b) marks sealed links that replay cleanly. Clay-red (#a5361f) marks
+    the two links that carry findings. Amber (#8a5f08) is the single accent and
+    marks the one link where replay diverged, index 5. Neutrals are ink
+    (#1c2321) for text and paper (#f4f1ea) for the background. No AI-default
