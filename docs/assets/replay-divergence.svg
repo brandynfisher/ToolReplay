@@ -21,3 +21,11 @@
   <text x="24" y="34" fill="#1c2321" font-size="16" font-weight="700"
         font-family="-apple-system, &quot;Segoe UI&quot;, Roboto, Helvetica, Arial, sans-serif">
     samples/session-dirty.jsonl: replay diverged at index 5
+  </text>
+
+  <!-- Six links in a vertical chain. Row pitch 44, box 32 tall, x fixed at 24. -->
+  <g font-family="&quot;Cascadia Mono&quot;, &quot;JetBrains Mono&quot;, Consolas, &quot;DejaVu Sans Mono&quot;, monospace"
+     font-size="12">
+
+    <!-- connectors, one stroke width per role: chain link = 1 -->
+    <g stroke="#1c2321" stroke-width="1">
