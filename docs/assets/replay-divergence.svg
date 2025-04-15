@@ -37,3 +37,11 @@
     </g>
 
     <!-- index 0 -->
+    <rect x="24" y="56" width="48" height="32" rx="3" fill="#276b6b"/>
+    <text x="40" y="76" fill="#f4f1ea" text-anchor="middle" font-weight="700">0</text>
+    <text x="88" y="70" fill="#1c2321">list_dir</text>
+    <text x="88" y="84" fill="#5a5750">c1bd7fb3</text>
+
+    <!-- index 1 -->
+    <rect x="24" y="100" width="48" height="32" rx="3" fill="#276b6b"/>
+    <text x="40" y="120" fill="#f4f1ea" text-anchor="middle" font-weight="700">1</text>
