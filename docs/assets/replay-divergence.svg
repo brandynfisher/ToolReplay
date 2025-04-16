@@ -52,3 +52,11 @@
     <rect x="24" y="144" width="48" height="32" rx="3" fill="#a5361f"/>
     <text x="40" y="164" fill="#f4f1ea" text-anchor="middle" font-weight="700">2</text>
     <text x="88" y="158" fill="#1c2321">read_file</text>
+    <text x="88" y="172" fill="#5a5750">fe5e31cd</text>
+    <text x="300" y="166" fill="#a5361f" font-weight="700">redundant call, identical to index 1</text>
+
+    <!-- index 3 -->
+    <rect x="24" y="188" width="48" height="32" rx="3" fill="#276b6b"/>
+    <text x="40" y="208" fill="#f4f1ea" text-anchor="middle" font-weight="700">3</text>
+    <text x="88" y="202" fill="#1c2321">search</text>
+    <text x="88" y="216" fill="#5a5750">40aadf3b</text>
