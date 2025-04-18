@@ -60,3 +60,11 @@
     <text x="40" y="208" fill="#f4f1ea" text-anchor="middle" font-weight="700">3</text>
     <text x="88" y="202" fill="#1c2321">search</text>
     <text x="88" y="216" fill="#5a5750">40aadf3b</text>
+    <text x="300" y="210" fill="#5a5750">search install, hits: 3</text>
+
+    <!-- index 4: permission overreach -->
+    <rect x="24" y="232" width="48" height="32" rx="3" fill="#a5361f"/>
+    <text x="40" y="252" fill="#f4f1ea" text-anchor="middle" font-weight="700">4</text>
+    <text x="88" y="246" fill="#1c2321">write_file</text>
+    <text x="88" y="260" fill="#5a5750">327da75f</text>
+    <text x="300" y="254" fill="#a5361f" font-weight="700">permission overreach, out of scope</text>
