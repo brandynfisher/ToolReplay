@@ -8,3 +8,7 @@ exist to exercise every code path in toolreplay. Each is described below.
 Declares an agent `docs-reader` permitted to call `read_file`, `list_dir`, and
 `search`. It deliberately does not permit `write_file`, so any write in a
 session is permission overreach.
+
+## session-clean.jsonl
+
+Four calls that replay cleanly: a directory listing, two distinct file reads,
