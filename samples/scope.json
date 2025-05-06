@@ -1,0 +1,1 @@
+{"agent": "docs-reader", "allowed_tools": ["read_file", "list_dir", "search"]}
