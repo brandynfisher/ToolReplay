@@ -12,3 +12,7 @@ session is permission overreach.
 ## session-clean.jsonl
 
 Four calls that replay cleanly: a directory listing, two distinct file reads,
+and one search. No identical call repeats, so there is no non-determinism and
+no redundancy. Every tool used is inside the declared scope.
+
+## session-dirty.jsonl
