@@ -16,3 +16,7 @@ and one search. No identical call repeats, so there is no non-determinism and
 no redundancy. Every tool used is inside the declared scope.
 
 ## session-dirty.jsonl
+
+Six calls constructed to trigger one of each finding type:
+
+- index 2 repeats the identical `read_file` from index 1 with nothing between
