@@ -55,3 +55,16 @@ class TestReplay(unittest.TestCase):
         kinds = sorted({f.kind for f in result.findings})
         self.assertEqual(kinds, [NON_DETERMINISM, REDUNDANT_CALL])
         redundant = [f for f in result.findings if f.kind == REDUNDANT_CALL]
+        nondet = [f for f in result.findings if f.kind == NON_DETERMINISM]
+        self.assertEqual(redundant[0].index, 2)
+        self.assertEqual(nondet[0].index, 5)
+
+    def test_clean_sample_replays_clean(self):
+        records = transcript.load("samples/session-clean.jsonl")
+        result = replay.replay(records)
+        self.assertEqual(result.findings, [])
+        self.assertIsNone(result.divergence_index)
+
+
+if __name__ == "__main__":
+    unittest.main()
