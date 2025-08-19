@@ -65,3 +65,19 @@ class TestCli(unittest.TestCase):
         self.assertNotEqual(tampered, sealed)
         fd, path = tempfile.mkstemp(suffix=".jsonl")
         try:
+            with os.fdopen(fd, "w", encoding="utf-8") as handle:
+                handle.write(tampered)
+            code, out, _ = run(["verify", path])
+            self.assertEqual(code, 1)
+            self.assertIn("chain: broken", out)
+        finally:
+            os.remove(path)
+
+    def test_missing_file_usage_error(self):
+        code, _, err = run(["replay", "samples/does-not-exist.jsonl"])
+        self.assertEqual(code, 2)
+        self.assertIn("file not found", err)
+
+
+if __name__ == "__main__":
+    unittest.main()
