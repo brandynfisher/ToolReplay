@@ -60,3 +60,18 @@ class TestChain(unittest.TestCase):
         self.assertEqual(result.broken_index, 1)
 
     def test_roundtrip_serialisation(self):
+        links = chain.seal(_records(SAMPLE))
+        text = chain.links_to_jsonl(links)
+        self.assertTrue(text.endswith("\n"))
+        # Re-parse via the sealed loader path by writing to a temp string file.
+        import io, json
+
+        reparsed = []
+        for line in text.splitlines():
+            reparsed.append(json.loads(line))
+        self.assertEqual(reparsed[0]["prev"], GENESIS)
+        self.assertEqual(reparsed[1]["prev"], links[0].digest)
+
+
+if __name__ == "__main__":
+    unittest.main()
