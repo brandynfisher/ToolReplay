@@ -43,3 +43,15 @@ class TestScope(unittest.TestCase):
         declared = scope.load("samples/scope.json")
         records = transcript.load("samples/session-dirty.jsonl")
         findings = scope.detect_overreach(records, declared)
+        self.assertEqual(len(findings), 1)
+        self.assertEqual(findings[0].index, 4)
+        self.assertIn("write_file", findings[0].detail)
+
+    def test_clean_sample_no_overreach(self):
+        declared = scope.load("samples/scope.json")
+        records = transcript.load("samples/session-clean.jsonl")
+        self.assertEqual(scope.detect_overreach(records, declared), [])
+
+
+if __name__ == "__main__":
+    unittest.main()
