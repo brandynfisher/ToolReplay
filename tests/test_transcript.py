@@ -46,3 +46,15 @@ class TestTranscript(unittest.TestCase):
         with self.assertRaises(TranscriptError):
             transcript.parse_text(text)
 
+    def test_canonical_call_ignores_key_order(self):
+        a = transcript.parse_text(
+            '{"index": 0, "tool": "t", "args": {"x": 1, "y": 2}, "response": {}}\n'
+        )[0]
+        b = transcript.parse_text(
+            '{"index": 0, "tool": "t", "args": {"y": 2, "x": 1}, "response": {}}\n'
+        )[0]
+        self.assertEqual(a.canonical_call(), b.canonical_call())
+
+
+if __name__ == "__main__":
+    unittest.main()
