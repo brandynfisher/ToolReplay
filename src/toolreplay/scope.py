@@ -78,3 +78,4 @@ def detect_overreach(records: list[Record], scope: Scope) -> list[Finding]:
                     ),
                 )
             )
+    return findings
