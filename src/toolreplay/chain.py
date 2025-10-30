@@ -129,3 +129,4 @@ def load_sealed(path: str) -> list[Link]:
         links.append(
             Link(index=obj["index"], prev=obj["prev"], digest=obj["digest"], record=record)
         )
+    return links
