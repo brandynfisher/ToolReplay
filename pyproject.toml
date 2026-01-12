@@ -16,3 +16,9 @@ keywords = ["audit", "tool-call", "replay", "hash-chain", "determinism"]
 toolreplay = "toolreplay.cli:main"
 
 [tool.setuptools]
+package-dir = { "" = "src" }
+
+[tool.setuptools.packages.find]
+where = ["src"]
+
+<!-- draft note 605 -->
