@@ -95,3 +95,20 @@ def build_parser() -> argparse.ArgumentParser:
     p_version = sub.add_parser("version", help="print the version")
     p_version.set_defaults(func=cmd_version)
 
+    return parser
+
+
+def main(argv=None) -> int:
+    parser = build_parser()
+    args = parser.parse_args(argv)
+    try:
+        return args.func(args)
+    except (TranscriptError, ScopeError) as exc:
+        sys.stderr.write(f"error: {exc}\n")
+        return EXIT_USAGE
+    except FileNotFoundError as exc:
+        sys.stderr.write(f"error: file not found: {exc.filename}\n")
+        return EXIT_USAGE
+
+
+if __name__ == "__main__":
