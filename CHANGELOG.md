@@ -35,3 +35,11 @@ All notable changes to this project are documented here.
 - Strict JSONL transcript parsing in `transcript.py`: unknown fields, bad
   indices, and non-object args/responses are hard errors.
 - Canonical call encoding (`{"tool", "args"}` with sorted keys) used for
+  byte-exact comparison.
+
+## 0.1.0 - 2021-06-14
+
+- First release: transcript model, line-oriented `report.py`, CLI skeleton,
+  and the first hand-authored sample fixtures.
+
+<!-- draft note 610 -->
