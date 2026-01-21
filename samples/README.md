@@ -28,4 +28,4 @@ Six calls constructed to trigger one of each finding type:
   first index where a deterministic replay would disagree with the record, so
   the CLI reports divergence at index 5.
 
-<!-- draft note 604 -->
+<!-- draft note 609 -->
