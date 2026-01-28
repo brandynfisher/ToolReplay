@@ -126,3 +126,6 @@ def _no_state_change_between(
             return False
         if mid.canonical_call() != call:
             return False
+    return True
+
+# draft note 615
