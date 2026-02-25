@@ -42,4 +42,4 @@ All notable changes to this project are documented here.
 - First release: transcript model, line-oriented `report.py`, CLI skeleton,
   and the first hand-authored sample fixtures.
 
-<!-- draft note 627 -->
+<!-- draft note 629 -->
