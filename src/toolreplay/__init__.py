@@ -8,4 +8,4 @@ redundant calls, and permission overreach.
 
 __version__ = "0.6.0"
 
-# draft note 625
+# draft note 636
