@@ -21,4 +21,4 @@ package-dir = { "" = "src" }
 [tool.setuptools.packages.find]
 where = ["src"]
 
-<!-- draft note 637 -->
+<!-- draft note 638 -->
