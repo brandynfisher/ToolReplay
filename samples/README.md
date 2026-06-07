@@ -26,3 +26,4 @@ Six calls constructed to trigger one of each finding type:
 - index 5 repeats the `search` from index 3 (same query) but the recorded
   response changed from 3 hits to 7 hits, so it is non-determinism. This is the
   first index where a deterministic replay would disagree with the record, so
+  the CLI reports divergence at index 5.
