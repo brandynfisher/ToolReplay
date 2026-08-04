@@ -450,4 +450,4 @@ Not promises, and not dated. Directions that fit the tool's scope:
 
 MIT. See [`LICENSE`](LICENSE).
 
-<!-- draft note 596 -->
+<!-- draft note 597 -->
