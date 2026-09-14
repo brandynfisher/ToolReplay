@@ -2,6 +2,10 @@
 
 All notable changes to this project are documented here.
 
+## [Unreleased]
+
+- Next: configurable mutator list for redundancy checks.
+
 ## 0.6.0 - 2026-03-12
 
 - Argument-aware scope groundwork: scope files accept an optional `target`
