@@ -8,6 +8,12 @@ with these fields:
     args     object, the arguments passed to the tool
     response object, the recorded response the tool returned
 
+One optional field is also accepted:
+
+    stdin_sha256  string, hex digest of the bytes piped to the tool on
+                  stdin. Absent means "unknown" and preserves the
+                  previous, args-only identity for the row.
+
 Blank lines are ignored. Parsing is strict: an unknown field, a missing
 required field, or an out-of-order index is a hard error, because an audit
 tool that silently repairs its input cannot be trusted.
@@ -18,6 +24,7 @@ from dataclasses import dataclass
 
 
 REQUIRED_FIELDS = ("index", "tool", "args", "response")
+OPTIONAL_FIELDS = ("stdin_sha256",)
 
 
 class TranscriptError(ValueError):
@@ -32,6 +39,7 @@ class Record:
     tool: str
     args: dict
     response: dict
+    stdin_sha256: str | None = None
 
     def canonical_call(self) -> str:
         """Return a stable string identifying the call (tool plus args).
@@ -41,6 +49,21 @@ class Record:
         """
         return json.dumps(
             {"tool": self.tool, "args": self.args},
+            sort_keys=True,
+            separators=(",", ":"),
+            ensure_ascii=True,
+        )
+
+    def canonical_key(self) -> str:
+        """Return a stable string identifying the call including its stdin.
+
+        Rows with no recorded stdin fall back to the args-only identity, so
+        transcripts written before this field existed behave exactly as before.
+        """
+        if self.stdin_sha256 is None:
+            return self.canonical_call()
+        return json.dumps(
+            {"tool": self.tool, "args": self.args, "stdin_sha256": self.stdin_sha256},
             sort_keys=True,
             separators=(",", ":"),
             ensure_ascii=True,
@@ -69,7 +92,7 @@ def _parse_line(raw: str, line_no: int) -> Record:
         if field not in obj:
             raise TranscriptError(f"line {line_no}: missing field {field!r}")
 
-    extra = set(obj) - set(REQUIRED_FIELDS)
+    extra = set(obj) - set(REQUIRED_FIELDS) - set(OPTIONAL_FIELDS)
     if extra:
         names = ", ".join(sorted(extra))
         raise TranscriptError(f"line {line_no}: unexpected field(s): {names}")
@@ -82,12 +105,15 @@ def _parse_line(raw: str, line_no: int) -> Record:
         raise TranscriptError(f"line {line_no}: args must be an object")
     if not isinstance(obj["response"], dict):
         raise TranscriptError(f"line {line_no}: response must be an object")
+    if "stdin_sha256" in obj and not isinstance(obj["stdin_sha256"], str):
+        raise TranscriptError(f"line {line_no}: stdin_sha256 must be a string")
 
     return Record(
         index=obj["index"],
         tool=obj["tool"],
         args=obj["args"],
         response=obj["response"],
+        stdin_sha256=obj.get("stdin_sha256"),
     )
 
 
