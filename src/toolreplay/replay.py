@@ -21,6 +21,10 @@ disagree with the record.
 from dataclasses import dataclass
 
 from toolreplay.findings import Finding, NON_DETERMINISM, REDUNDANT_CALL
+
+# Same tool and args, different stdin, different response: the world moved
+# under the call rather than the call being non-deterministic. Informational.
+WORLD_CHANGE = "world-change"
 from toolreplay.transcript import Record
 
 
@@ -50,13 +54,16 @@ def replay(records: list[Record], mutators: frozenset[str] = DEFAULT_MUTATORS) -
     findings: list[Finding] = []
     divergence_index: int | None = None
 
-    # Map canonical call -> recorded response first seen for it.
+    # Map canonical call (tool, args, stdin) -> response first seen for it.
     seen_response: dict[str, str] = {}
     # Map canonical call -> index it was last observed at.
     last_seen_index: dict[str, int] = {}
+    # Map args-only call -> [(stdin, response, index)] observed so far.
+    by_args: dict[str, list[tuple[str | None, str, int]]] = {}
 
     for pos, record in enumerate(records):
-        call = record.canonical_call()
+        call = record.canonical_key()
+        args_call = record.canonical_call()
         response = record.canonical_response()
 
         if call in seen_response:
@@ -79,7 +86,7 @@ def replay(records: list[Record], mutators: frozenset[str] = DEFAULT_MUTATORS) -
                 # identical calls could have changed state.
                 prev_pos = None
                 for back in range(pos - 1, -1, -1):
-                    if records[back].canonical_call() == call:
+                    if records[back].canonical_key() == call:
                         prev_pos = back
                         break
                 if prev_pos is not None and _no_state_change_between(
@@ -97,8 +104,27 @@ def replay(records: list[Record], mutators: frozenset[str] = DEFAULT_MUTATORS) -
                         )
                     )
         else:
+            witness = _world_change_witness(
+                by_args.get(args_call, ()), record.stdin_sha256, response
+            )
+            if witness is not None:
+                findings.append(
+                    Finding(
+                        kind=WORLD_CHANGE,
+                        index=record.index,
+                        detail=(
+                            f"tool {record.tool!r} ran with the same arguments as "
+                            f"index {witness} but different stdin and a different "
+                            f"response; replay the witness pair "
+                            f"({witness}, {record.index})"
+                        ),
+                    )
+                )
             seen_response[call] = response
 
+        by_args.setdefault(args_call, []).append(
+            (record.stdin_sha256, response, record.index)
+        )
         last_seen_index[call] = record.index
 
     return ReplayResult(
@@ -106,6 +132,23 @@ def replay(records: list[Record], mutators: frozenset[str] = DEFAULT_MUTATORS) -
         divergence_index=divergence_index,
         call_count=len(records),
     )
+
+
+def _world_change_witness(prior, stdin_sha256, response):
+    """Return the index of the earliest differing-stdin, differing-response call.
+
+    None when every earlier call with these arguments either shared this stdin
+    or returned the same response. Rows with no recorded stdin never match, so
+    stdin-less transcripts produce no world-change findings.
+    """
+    if stdin_sha256 is None:
+        return None
+    for prior_stdin, prior_response, index in prior:
+        if prior_stdin is None or prior_stdin == stdin_sha256:
+            continue
+        if prior_response != response:
+            return index
+    return None
 
 
 def _no_state_change_between(
@@ -124,6 +167,6 @@ def _no_state_change_between(
         mid = records[between]
         if mid.tool in mutators:
             return False
-        if mid.canonical_call() != call:
+        if mid.canonical_key() != call:
             return False
     return True
