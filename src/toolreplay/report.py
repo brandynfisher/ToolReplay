@@ -33,14 +33,20 @@ def render_scope_report(findings: list[Finding], call_count: int) -> str:
     return "\n".join(lines) + "\n"
 
 
-def render_verify_report(ok: bool, broken_index, expected, found) -> str:
+def render_verify_report(
+    ok: bool, broken_index, expected, found, anchored=True, anchor_error=None
+) -> str:
     """Render the chain verification result."""
     if ok:
-        return "chain: intact\n"
+        if anchored:
+            return "chain: intact\n"
+        return "chain: intact (unanchored)\n"
     lines = [
         "chain: broken",
         f"first broken link: index {broken_index}",
         f"expected: {expected}",
         f"found: {found}",
     ]
+    if anchor_error:
+        lines.append(f"reason: {anchor_error}")
     return "\n".join(lines) + "\n"

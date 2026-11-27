@@ -4,6 +4,14 @@ All notable changes to this project are documented here.
 
 ## [Unreleased]
 
+- Sealed files now end with an anchor line containing the record count and
+  final head digest. Truncation and stale anchors fail verification; files
+  written by older versions still verify but are reported as unanchored.
+- Sealed records are parsed strictly: extra fields, bad indices and malformed
+  JSON are usage errors instead of tracebacks.
+- `verify_file()` exposes the computed head so callers can pin it outside the
+  file. A full re-seal still needs that external pin to be detected.
+- CLI handles unreadable files and decode errors with exit code 2.
 - Next: configurable mutator list for redundancy checks.
 
 ## 0.6.0 - 2026-03-12
