@@ -45,11 +45,15 @@ def cmd_replay(args) -> int:
 
 
 def cmd_verify(args) -> int:
-    links = chain.load_sealed(args.sealed)
-    result = chain.verify(links)
+    result = chain.verify_file(args.sealed)
     sys.stdout.write(
         report.render_verify_report(
-            result.ok, result.broken_index, result.expected, result.found
+            result.ok,
+            result.broken_index,
+            result.expected,
+            result.found,
+            result.anchored,
+            result.anchor_error,
         )
     )
     return EXIT_CLEAN if result.ok else EXIT_FINDINGS
@@ -103,11 +107,14 @@ def main(argv=None) -> int:
     args = parser.parse_args(argv)
     try:
         return args.func(args)
-    except (TranscriptError, ScopeError) as exc:
+    except (TranscriptError, ScopeError, UnicodeDecodeError) as exc:
         sys.stderr.write(f"error: {exc}\n")
         return EXIT_USAGE
     except FileNotFoundError as exc:
         sys.stderr.write(f"error: file not found: {exc.filename}\n")
+        return EXIT_USAGE
+    except OSError as exc:
+        sys.stderr.write(f"error: cannot read file: {exc}\n")
         return EXIT_USAGE
 
 
